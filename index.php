@@ -1,41 +1,47 @@
-<html>
+<html lang="fr">
 
 <body>
-test
-
 <?php
 
 require_once("Connection.php");
+require_once("TacheGateWay.php");
 
-//A CHANGER
-$user = 'malanone';
-$pass = 'azertyuiop';
-$dsn = 'mysql:host=localhost;dbname=to_do_list';
-try {
-    $con = new Connection($dsn, $user, $pass);
-    $tacheGateway = new ArtisteGateway($con);
+$user= 'trbarlet';
+$pass='achanger';
+$dsn='mysql:host=localhost;dbname=dbtrbarlet';
 
-
-    echo $tacheGateway->insert("test", "test", 1);
-
-    $results = $tacheGateway->findAll();
-    foreach ($results as $row) {
-        print "<br>";
-        print "Id : " . $row['id'] . "<br>";
-        print "Titre :" . $row['titre'] . "<br>";
-        print "Description :" . $row['description'] . "<br>";
-        print "Cree le : " . $row['created_at']  . "<br>";
-        print "Derniere modif le : " . $row['updated_at'] . "<br>";
-        print "Priorite : " . $row['priorite']  . "<br>";
+try{
+    $gateway=new TacheGateway(new Connection($dsn,$user,$pass));
+    $gateway->insertTache("test","test",1);
+    //echo "insertion réussie";
+    // affichage des taches
+    $taches=$gateway->getTaches();
+    //echo "affichage des taches";
+    //echo $taches;
+    foreach ($taches as $tache){
+        //echo $tache;
     }
-} catch (PDOException $Exception) {
-    echo 'erreur';
-    echo $Exception->getMessage();
+    foreach($taches as $tache){
+        echo $tache->getNom();
+        echo $tache->getDescriptionTache();
+        echo $tache->getImportance();
+        echo $tache->getDateCreation();
+        echo $tache->getDateModification();
+        echo "<br>";
+    }
+}catch (PDOException $e){
+    echo "<h3> Erreur PDO : " . $e->getMessage() . "</h3>";
+}catch (Exception $e){
+    echo "<h3> Erreur : " . $e->getMessage() . "</h3>";
 }
+
+
+
+
+
 
 
 ?>
 
 </body>
-
 </html>

@@ -2,50 +2,81 @@
 
 class Tache
 {
-    private $id;
-    private $titre;
-    private $description;
-    private $createdAt;
-    private $updatedAt;
-    private $priorite;
+    private int $id;
+    private string $nom;
+    private string $descriptionTache;
+    private int $importance;
+    private string $dateCreation;
+    private string $dateModification;
 
-    public function __construct(int $id, string $titre, string $description, string $createdAt, string $updatedAt, int $priorite)
+    public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification)
     {
         $this->id = $id;
-        $this->titre = $titre;
-        $this->description = $description;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-        $this->priorite = $priorite;
+        $this->nom = $nom;
+        $this->descriptionTache = $descriptionTache;
+        $this->importance = $importance;
+        $this->dateCreation = $dateCreation;
+        $this->dateModification = $dateModification;
     }
 
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
 
-    public function getTitre()
+    public function setId(int $id)
     {
-        return $this->titre;
+        $this->id = $id;
     }
 
-    public function getDescription()
+    public function getNom() : string
     {
-        return $this->description;
+        return $this->nom;
     }
 
-    public function getCreatedAt()
+    public function setNom(string $nom)
     {
-        return $this->createdAt;
+        $this->nom = $nom;
     }
 
-    public function getUpdatedAt()
+    public function getDescriptionTache() : string
     {
-        return $this->updatedAt;
+        return $this->descriptionTache;
     }
 
-    public function getPriorite()
+    public function setDescriptionTache(string $descriptionTache)
     {
-        return $this->priorite;
+        $this->descriptionTache = $descriptionTache;
     }
+
+    public function getImportance() : int
+    {
+        return $this->importance;
+    }
+
+    public function setImportance(int $importance)
+    {
+        $this->importance = $importance;
+    }
+
+    public function getDateCreation() : string
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(string $dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+    public function getDateModification() : string
+    {
+        return $this->dateModification;
+    }
+
+    public function setDateModification(string $dateModification)
+    {
+        $this->dateModification = $dateModification;
+    }
+
 }
