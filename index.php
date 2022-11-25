@@ -10,6 +10,11 @@ $user= 'trbarlet';
 $pass='achanger';
 $dsn='mysql:host=localhost;dbname=dbtrbarlet';
 
+
+//chargement autoloader pour autochargement des classes
+require_once(__DIR__.'/config/Autoload.php');
+Autoload::charger();
+
 try{
     $gateway=new TacheGateway(new Connection($dsn,$user,$pass));
     $gateway->insertTache("test","test",1);

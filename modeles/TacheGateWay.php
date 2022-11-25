@@ -1,5 +1,4 @@
 <?php
-include_once 'Tache.php';
 
 class TacheGateway
 {
