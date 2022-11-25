@@ -14,7 +14,7 @@ class Autoload
 
 
         if(!spl_autoload_register(array(self::$_instance, '_autoload'), false)) {
-            throw RuntimeException(sprintf('%s : Could not start the autoload', __CLASS__));
+            echo "Could not start the autoload";
         }
     }
 
@@ -34,12 +34,13 @@ class Autoload
     {
         global $rep;
         $filename = $class.'.php';
-        $dir =array('modeles/','./','config/','controleur/');
+        $dir =array('modeles/','./','config/','controleurs/');
         foreach ($dir as $d){
             $file=$rep.$d.$filename;
-            //echo $file;
+            //echo $file ."<BR>";
             if (file_exists($file))
             {
+                echo "include $file <BR>";
                 include $file;
             }
         }

@@ -8,8 +8,9 @@ class Tache
     private int $importance;
     private string $dateCreation;
     private string $dateModification;
+    private int $listeId;
 
-    public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification)
+    public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification, int $listeId)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -17,16 +18,12 @@ class Tache
         $this->importance = $importance;
         $this->dateCreation = $dateCreation;
         $this->dateModification = $dateModification;
+        $this->listeId = $listeId;
     }
 
     public function getId() : int
     {
         return $this->id;
-    }
-
-    public function setId(int $id)
-    {
-        $this->id = $id;
     }
 
     public function getNom() : string
@@ -77,6 +74,11 @@ class Tache
     public function setDateModification(string $dateModification)
     {
         $this->dateModification = $dateModification;
+    }
+
+    public function getListeId(): int
+    {
+        return $this->listeId;
     }
 
 }

@@ -11,6 +11,7 @@ CREATE TABLE Utilisateur (
 CREATE TABLE Liste (
    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
    nom varchar(50) NOT NULL,
+   dateCreation date NOT NULL DEFAULT NOW(),
    dateModification date NOT NULL DEFAULT NOW(),
    possesseur bigint(20) UNSIGNED DEFAULT NULL,
    FOREIGN KEY (possesseur) REFERENCES Utilisateur(id),
@@ -33,9 +34,9 @@ CREATE TABLE Tache (
 INSERT INTO Utilisateur(nom, prenom, email, password) VALUES
     ('Dupont', 'Jean', 'dupontJean@gmail.com', '1234');
 
-INSERT INTO Liste(nom, dateModification, possesseur) VALUES
-    ('Liste de course', '2022-11-08', (SELECT id FROM Utilisateur WHERE nom = 'Dupont')),
-    ('Liste du mois', '2022-11-08', NULL);
+INSERT INTO Liste(nom, possesseur) VALUES
+    ('Liste de course', (SELECT id FROM Utilisateur WHERE nom = 'Dupont')),
+    ('Liste du mois', NULL);
 
 
 INSERT INTO Tache(nom, descriptionTache, importance,listeID) VALUES

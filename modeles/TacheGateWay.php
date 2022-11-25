@@ -4,83 +4,59 @@ class TacheGateway
 {
     private Connection $con;
 
-    /**
-     * @param Connection $con
-     */
     public function __construct(Connection $con)
     {
         $this->con = $con;
     }
 
-    /**
-     * @param $nom
-     * @param $descriptionTache
-     * @param $importance
-     * @return bool
-     */
-    public function insertTache($nom, $descriptionTache, $importance)
+    public function insert(Tache $tache): void
     {
-        $query = "INSERT INTO Tache (nom, descriptionTache, importance) VALUES (:nom, :descriptionTache, :importance)";
+        $query = "INSERT INTO tache (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
         $parameters = [
-            ":nom" => [$nom, PDO::PARAM_STR],
-            ":descriptionTache" => [$descriptionTache, PDO::PARAM_STR],
-            ":importance" => [$importance, PDO::PARAM_INT]
+            ":nom" => [$tache->getNom(), PDO::PARAM_STR],
+            ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],
+            ":importance" => [$tache->getImportance(), PDO::PARAM_INT],
+            ":listeId" => [$tache->getListeId(), PDO::PARAM_INT]
         ];
-        return $this->con->executeQuery($query, $parameters);
+        $this->con->executeQuery($query, $parameters);
     }
 
-    /**
-     * @return Tache[]
-     */
-    public function updateTache($id, $nom, $descriptionTache, $importance)
+    public function supprimerTache(int $id): void
     {
-        $query = "UPDATE Tache SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
+        $query = "DELETE FROM tache WHERE id = :id";
         $parameters = [
-            ':id' => [$id, PDO::PARAM_INT],
-            ':nom' => [$nom, PDO::PARAM_STR],
-            ':descriptionTache' => [$descriptionTache, PDO::PARAM_STR],
-            ':importance' => [$importance, PDO::PARAM_INT],
+            ":id" => [$id, PDO::PARAM_INT]
         ];
-        return $this->con->executeQuery($query, $parameters);
+        $this->con->executeQuery($query, $parameters);
     }
 
-    /**
-     * @param int $id
-     */
-    public function deleteTache(int $id)
+    public function getTachesByListeId(int $listeId): array
     {
-        $query = "DELETE FROM Tache WHERE id = :id";
-        $this->con->executeQuery($query, [
-            ':id' => [$id, PDO::PARAM_INT]
-        ]);
-    }
-
-    /**
-     * @param int $id
-     * @return Tache
-     */
-    public function getTache(int $id) : Tache
-    {
-        $query = "SELECT * FROM Tache WHERE id = :id";
-        $this->con->executeQuery($query, [
-            ':id' => [$id, PDO::PARAM_INT]
-        ]);
-        $result = $this->con->getResults();
-        return new Tache($result['id'], $result['nom'], $result['descriptionTache'], $result['importance'], $result['dateCreation'], $result['dateModification']);
-    }
-
-    /**
-     * @return Tache[]
-     */
-    public function getTaches() : array
-    {
-        $query = "SELECT * FROM Tache";
-        $this->con->executeQuery($query);
+        $query = "SELECT * FROM tache WHERE listeId = :listeId";
+        $parameters = [
+            ":listeId" => [$listeId, PDO::PARAM_INT]
+        ];
+        $this->con->executeQuery($query, $parameters);
         $results = $this->con->getResults();
         $taches = [];
-        foreach ($results as $ligne) {
-            $taches[] = new Tache($ligne['id'], $ligne['nom'], $ligne['descriptionTache'], $ligne['importance'], $ligne['dateCreation'], $ligne['dateModification']);
+        foreach ($results as $result) {
+            $taches[] = new Tache($result["id"], $result["nom"], $result["descriptionTache"], $result["importance"], $result["dateCreation"], $result["dateModification"], $result["listeId"]);
         }
         return $taches;
     }
+
+    public function modificationTache (Tache $tache) : void
+    {
+        $query = "UPDATE tache SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
+        $parameters = [
+            ":nom" => [$tache->getNom(), PDO::PARAM_STR],
+            ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],
+            ":importance" => [$tache->getImportance(), PDO::PARAM_INT],
+            ":id" => [$tache->getId(), PDO::PARAM_INT]
+        ];
+        $this->con->executeQuery($query, $parameters);
+    }
+
 }
+
+
