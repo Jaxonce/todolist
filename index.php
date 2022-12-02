@@ -12,6 +12,7 @@ require_once(__DIR__.'/config/AutoLoader.php');
 Autoload::charger();
 
 try{
+    global $base, $login, $mdp;
     $co = new Connection($base,$login,$mdp);
     $gatewayListe=new ListeGateway($co);
     $lesListesPublic=$gatewayListe->getAllPublic();
