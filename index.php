@@ -2,9 +2,6 @@
 
 <body>
 <?php
-$user= 'trbarlet';
-$pass='achanger';
-$dsn='mysql:host=localhost;dbname=dbtrbarlet';
 
 
 //chargement config
@@ -15,7 +12,7 @@ require_once(__DIR__.'/config/AutoLoader.php');
 Autoload::charger();
 
 try{
-    $co = new Connection($dsn,$user,$pass);
+    $co = new Connection($base,$login,$mdp);
     $gatewayListe=new ListeGateway($co);
     echo "ici <BR>";
     $lesListesPublic=$gatewayListe->getAllPublic();

@@ -8,11 +8,10 @@ class Liste
     private string $dateModification;
     private int $userId;
 
-    public function __construct(int $id, string $nom, string $dateCreation, string $dateModification, int $userId)
+    public function __construct(int $id, string $nom, string $dateModification, int $userId)
     {
         $this->id = $id;
         $this->nom = $nom;
-        $this->dateCreation = $dateCreation;
         $this->dateModification = $dateModification;
         $this->userId = $userId;
     }
