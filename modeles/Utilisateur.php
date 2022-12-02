@@ -6,15 +6,13 @@ class Utilisateur
     private string $nom;
     private string $prenom;
     private string $email;
-    private string $motDePasse;
 
-    public function __construct(int $id, string $nom, string $prenom, string $email, string $motDePasse, string $dateCreation, string $dateModification)
+    public function __construct(int $id, string $nom, string $prenom, string $email, string $motDePasse)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->email = $email;
-        $this->motDePasse = $motDePasse;
     }
 
     public function getId(): int
@@ -40,11 +38,6 @@ class Utilisateur
     public function setPrenom(string $prenom)
     {
         $this->prenom = $prenom;
-    }
-
-    public function getMotDePasse(): string
-    {
-        return $this->motDePasse;
     }
 
     public function getEmail(): string

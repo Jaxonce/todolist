@@ -39,19 +39,7 @@ class ListeGateway
     {
         $query = "SELECT * FROM Liste WHERE possesseur IS NULL";
         $this->con->executeQuery($query);
-        $results = $this->con->getResults();
-        $liste = [];
-        foreach ($results as $result) {
-            echo $result['id'], $result['nom'], $result['dateCreation'], $result['dateModification'], $result['possesseur']. "<br>";
-            if ($result['possesseur'] == null) {
-                $liste[] = new Liste($result['id'], $result['nom'], $result['dateCreation'], $result['dateModification'], null);
-            }
-            else {
-                $liste[] = new Liste($result['id'], $result['nom'], $result['dateCreation'], $result['dateModification'], $result['possesseur']);
-            }
-        }
-        echo "jusqu'ici tout va bien ! <br>";
-        return $liste;
+        return $this->con->getResults();
     }
 
     public function getAllByUserId (int $possesseur): array
@@ -60,11 +48,6 @@ class ListeGateway
         $this->con->executeQuery($query, array(
             ':possesseur' => array($possesseur, PDO::PARAM_INT)
         ));
-        $results = $this->con->getResults();
-        $liste = [];
-        foreach ($results as $result) {
-            $liste[] = new Liste($result['id'], $result['nom'], $result['date_creation'], $result['date_modification'], $result['possesseur']);
-        }
-        return $liste;
+        return $this->con->getResults();
     }
 }

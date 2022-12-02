@@ -14,13 +14,14 @@ Autoload::charger();
 try{
     $co = new Connection($base,$login,$mdp);
     $gatewayListe=new ListeGateway($co);
-    echo "ici <BR>";
     $lesListesPublic=$gatewayListe->getAllPublic();
-    echo "ici <BR>";
-
+    echo "ici<br>";
     $gatewayTache=new TacheGateway($co);
+    echo "ici<br>";
     foreach ($lesListesPublic as $uneListe){
+        echo "ici<br>";
         $lesTaches=$gatewayTache->getTachesByListeId($uneListe->getId());
+        echo "ici<br>";
         echo "<br>";
         echo "<h1>".$uneListe->getNom()."</h1>";
         foreach ($lesTaches as $uneTache){

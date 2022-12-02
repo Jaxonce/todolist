@@ -4,7 +4,6 @@ class Liste
 {
     private int $id;
     private string $nom;
-    private string $dateCreation;
     private string $dateModification;
     private int $userId;
 
@@ -29,11 +28,6 @@ class Liste
     public function setNom(string $nom)
     {
         $this->nom = $nom;
-    }
-
-    public function getDateCreation() : string
-    {
-        return $this->dateCreation;
     }
 
     public function getDateModification() : string

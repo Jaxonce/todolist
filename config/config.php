@@ -11,10 +11,9 @@ $rep=__DIR__.'/../';
 
 //BD
 
-
-$login="malanone";
-$mdp="azertyuiop";
-$base="mysql:host=localhost;dbname=projet_php";
+$base="mysql:host=localhost;dbname=dbtrbarlet";
+$login="trbarlet";
+$mdp="achanger";
 
 //Vues
 

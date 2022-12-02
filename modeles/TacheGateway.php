@@ -11,7 +11,7 @@ class TacheGateway
 
     public function insert(Tache $tache): void
     {
-        $query = "INSERT INTO tache (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
+        $query = "INSERT INTO Tache (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
         $parameters = [
             ":nom" => [$tache->getNom(), PDO::PARAM_STR],
             ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],
@@ -23,7 +23,7 @@ class TacheGateway
 
     public function supprimerTache(int $id): void
     {
-        $query = "DELETE FROM tache WHERE id = :id";
+        $query = "DELETE FROM Tache WHERE id = :id";
         $parameters = [
             ":id" => [$id, PDO::PARAM_INT]
         ];
@@ -32,22 +32,17 @@ class TacheGateway
 
     public function getTachesByListeId(int $listeId): array
     {
-        $query = "SELECT * FROM tache WHERE listeId = :listeId";
+        $query = "SELECT * FROM Tache WHERE listeId = :listeId";
         $parameters = [
             ":listeId" => [$listeId, PDO::PARAM_INT]
         ];
         $this->con->executeQuery($query, $parameters);
-        $results = $this->con->getResults();
-        $taches = [];
-        foreach ($results as $result) {
-            $taches[] = new Tache($result["id"], $result["nom"], $result["descriptionTache"], $result["importance"], $result["dateCreation"], $result["dateModification"], $result["listeId"]);
-        }
-        return $taches;
+        return $this->con->getResults();
     }
 
     public function modificationTache (Tache $tache) : void
     {
-        $query = "UPDATE tache SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
+        $query = "UPDATE Tache SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
         $parameters = [
             ":nom" => [$tache->getNom(), PDO::PARAM_STR],
             ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],
