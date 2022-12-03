@@ -9,22 +9,19 @@ class Model
     public function getListPublic() : iterable // $page ?
     {
         global $dsn, $login, $mdp;
-
-        $tabList=array();
+        $tab = array();
 
         $g=new ListeGateway(new Connection($dsn,$login,$mdp));
-        $publicListFromDB =array();
-        $publicListFromDB = $g->getAllPublic();
+        $publicListFromDB=$g->getAllPublic();
 
-
-        foreach ($tabList as $publicListFromDB) {
-            $tabList[] = new Liste(
-                $tabList['id'],
-                $tabList['nom'],
-                $tabList['dateModification'],
-                $tabList['userId']);
+        foreach ($publicListFromDB as $tabList) {
+            if ($tabList['possesseur']) {
+                $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification'],$tabList['possesseur']);
+            } else {
+                $tab[] = new Liste($tabList['id'], $tabList['nom'],$tabList['dateModification'],0);
+            }
         }
-        return $tabList;
+        return $tab;
     }
 
 //    public function getListByUserId(int $userId) : array

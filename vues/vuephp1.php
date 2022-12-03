@@ -119,11 +119,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
 <?php
-if(! isset($tabAllList)){
+if(! isset($todoListPublic)){
     echo "Pas de liste";
 }
 else{
-    foreach($tabAllList as $uneliste){
+    foreach($todoListPublic as $uneliste){
         echo $uneliste->getNom();
     }
 }
