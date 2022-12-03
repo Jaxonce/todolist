@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <div class="header-blue" style="padding: 0px;">
+        <div class="header-blue" style="padding: 0;">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #0c63e4">
                 <div class="container" ><a class="navbar-brand" href="#"> ToDoListApp</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
@@ -27,107 +27,61 @@
             </nav>
         </div>
     </header>
-    <div class="container hero">
-        <section class="vh-100" style="height: 400px; width: 600px;">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col col-xl-10">
+    <form method="post" action="?action=ajoutListe">
+        <input type="text" id="form3" class="form-control form-control-lg" name="nameNewListPublic"/>
+        <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
+    </form>
 
-                        <div class="card" style="border-radius: 15px;">
-                            <div class="card-body p-5">
-                                <h6 class="mb-3">Awesome Todo List</h6>
-                                <form class="d-flex justify-content-center align-items-center mb-4">
-                                    <div class="form-outline flex-fill">
-                                        <input type="text" id="form3" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3">What do you need to do today?</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
-                                </form>
+    <?php
+        if(! isset($todoListPublic)){
+            echo "Pas de liste";
+        }else {
 
-                                <ul class="list-group mb-0">
-                                    <li
-                                            class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                            Cras justo odio
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                    <li
-                                            class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                                            <s>Dapibus ac facilisis in</s>
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                    <li
-                                            class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                            Morbi leo risus
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                    <li
-                                            class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                            Porta ac consectetur ac
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                    <li
-                                            class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-0">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                                            Vestibulum at eros
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                    <li
-                                            class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                            Morbi leo risus
-                                        </div>
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                            <i class="fas fa-times text-primary"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+            foreach ($todoListPublic as $uneliste) {
 
-                            </div>
-                        </div>
 
-                    </div>
+    ?>
+
+
+    <div class="card" style="border-radius: 15px;">
+        <div class="card-body p-5">
+            <h6 class="mb-3">
+                <?php
+                            echo $uneliste->getNom();
+
+                ?>
+            </h6>
+            <form class="d-flex justify-content-center align-items-center mb-4">
+                <div class="form-outline flex-fill">
+                    <input type="text" id="form3" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3">What do you need to do today?</label>
                 </div>
-            </div>
-        </section>
+                <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
+            </form>
+
+            <ul class="list-group mb-0">
+                <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                    <div class="d-flex align-items-center">
+                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                        Cras justo odio
+                    </div>
+                    <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                        <i class="fas fa-times text-primary"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
     </div>
+    <?php
+            }
+        }
+    ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
-<?php
-if(! isset($todoListPublic)){
-    echo "Pas de liste";
-}
-else{
-    foreach($todoListPublic as $uneliste){
-        echo $uneliste->getNom();
-    }
-}
-?>
 
 </body>
 </html>

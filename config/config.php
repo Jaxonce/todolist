@@ -19,6 +19,3 @@ $mdp="azertyuiop";
 
 $vues['erreur']='vues/erreur.php';
 $vues['vuephp1']='vues/vuephp1.php';
-
-
-?>

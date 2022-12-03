@@ -14,9 +14,12 @@ class UserControl{
                 case NULL:
                     $this->displayPublicList();
                     break;
+                case 'ajoutListe':
+                    $this->addPublicList();
+                    break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
-                    require($rep.$vues['authentication']);
+                    require($rep.$vues['erreur']);
             }
         }catch(PDOException $e){
             $dVueErreur[] = "Erreur inattendue PDO";
@@ -29,7 +32,17 @@ class UserControl{
         $todoListPublic=array();
 
         $todoListPublic=$mdl->getListPublic();
-        echo "on est la";
+        require($vues['vuephp1']);
+    }
+
+    public function addPublicList(){
+        global $vues;
+        $mdl = new Model();
+        $name=$_REQUEST['nameNewListPublic'];
+        $mdl->addList($name,1);
+        $todoListPublic=array();
+
+        $todoListPublic=$mdl->getListPublic();
         require($vues['vuephp1']);
     }
 

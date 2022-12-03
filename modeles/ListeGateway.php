@@ -12,7 +12,7 @@ class ListeGateway
 
     public function insert(Liste $liste): void
     {
-        $query = "INSERT INTO Liste (nom, user_id) VALUES (:nom, :user_id)";
+        $query = "INSERT INTO Liste (nom, possesseur) VALUES (:nom, :user_id)";
         $this->con->executeQuery($query, array(
             ':nom' => array($liste->getNom(), PDO::PARAM_STR),
             ':user_id' => array($liste->getUserId(), PDO::PARAM_INT)
