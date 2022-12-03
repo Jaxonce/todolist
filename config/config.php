@@ -11,7 +11,7 @@ $rep=__DIR__.'/../';
 
 //BD
 
-$base="mysql:host=localhost;dbname=projet_php";
+$dsn="mysql:host=localhost;dbname=TO_DO_LIST";
 $login="malanone";
 $mdp="azertyuiop";
 

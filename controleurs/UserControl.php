@@ -1,31 +1,36 @@
 <?php
-
+require_once('config/config.php');
 class UserControl{
     private Model $mdl;
     public function __construct(){
+        global $vues,$rep;
         $this->mdl = new Model();
         session_start();
-
+        $dVueErreur=array();
         try{
             $action=$_REQUEST['action'];
 
             switch($action){
                 case NULL:
-                    $this->afficherConnexion();
+                    $this->displayPublicList();
                     break;
-                case 'afficherListePerso':
-                    $this->afficherListePerso();
-                    break;
-                case 'afficherListePublique':
-                    $this->afficherListePublique();
-                    break;
-                case 'deconnexion':
-                    $this->deconnexion();
-                    break;
+                default:
+                    $dVueErreur[] = "Erreur d'appel php";
+                    require($rep.$vues['authentication']);
             }
-        }catch(Exception $e){
-            $this->afficherErreur($e->getMessage());
+        }catch(PDOException $e){
+            $dVueErreur[] = "Erreur inattendue PDO";
+            echo $e->getMessage();
         }
+    }
+    public function displayPublicList(){
+        global $vues;
+        $mdl = new Model();
+        $todoListPublic=array();
+
+        $todoListPublic=$mdl->getListPublic();
+        echo "on est la";
+        require($vues['vuephp1']);
     }
 
 }

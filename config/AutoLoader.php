@@ -40,7 +40,6 @@ class Autoload
             //echo $file ."<BR>";
             if (file_exists($file))
             {
-                echo "include $file <BR>";
                 include $file;
             }
         }

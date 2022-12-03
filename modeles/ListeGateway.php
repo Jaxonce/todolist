@@ -1,8 +1,9 @@
 <?php
 
+require_once 'config/config.php';
 class ListeGateway
 {
-    private $con;
+    protected $con;
 
     public function __construct(Connection $con)
     {
@@ -37,9 +38,11 @@ class ListeGateway
 
     public function getAllPublic (): array
     {
-        $query = "SELECT * FROM Liste WHERE possesseur IS NULL";
+        $query = "SELECT * FROM Liste";
         $this->con->executeQuery($query);
-        return $this->con->getResults();
+
+        $result = $this->con->getResults();
+        return $result;
     }
 
     public function getAllByUserId (int $possesseur): array
