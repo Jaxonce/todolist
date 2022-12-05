@@ -1,6 +1,6 @@
 <?php
 
-class TacheGateway
+class TaskGateway
 {
     private Connection $con;
 
@@ -9,9 +9,9 @@ class TacheGateway
         $this->con = $con;
     }
 
-    public function insert(Tache $tache): void
+    public function insert(Task $tache): void
     {
-        $query = "INSERT INTO Tache (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
+        $query = "INSERT INTO Task (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
         $parameters = [
             ":nom" => [$tache->getNom(), PDO::PARAM_STR],
             ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],
@@ -23,7 +23,7 @@ class TacheGateway
 
     public function supprimerTache(int $id): void
     {
-        $query = "DELETE FROM Tache WHERE id = :id";
+        $query = "DELETE FROM Task WHERE id = :id";
         $parameters = [
             ":id" => [$id, PDO::PARAM_INT]
         ];
@@ -32,7 +32,7 @@ class TacheGateway
 
     public function getTachesByListeId(int $listeId): array
     {
-        $query = "SELECT * FROM Tache WHERE listeId = :listeId";
+        $query = "SELECT * FROM Task WHERE listeId = :listeId";
         $parameters = [
             ":listeId" => [$listeId, PDO::PARAM_INT]
         ];
@@ -40,9 +40,9 @@ class TacheGateway
         return $this->con->getResults();
     }
 
-    public function modificationTache (Tache $tache) : void
+    public function modificationTache (Task $tache) : void
     {
-        $query = "UPDATE Tache SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
+        $query = "UPDATE Task SET nom = :nom, descriptionTache = :descriptionTache, importance = :importance, dateModification = NOW() WHERE id = :id";
         $parameters = [
             ":nom" => [$tache->getNom(), PDO::PARAM_STR],
             ":descriptionTache" => [$tache->getDescriptionTache(), PDO::PARAM_STR],

@@ -16,6 +16,7 @@ class UserControl{
                     break;
                 case 'ajoutListe':
                     $this->addPublicList();
+                    $action = NULL;
                     break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
@@ -36,14 +37,16 @@ class UserControl{
     }
 
     public function addPublicList(){
-        global $vues;
         $mdl = new Model();
         $name=$_REQUEST['nameNewListPublic'];
         $mdl->addList($name,1);
-        $todoListPublic=array();
+        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'ajoutListe') {
+            // do the insert
+            /* redirect after the insert */
+            header('Location: index.php');
+            exit();
+        }
 
-        $todoListPublic=$mdl->getListPublic();
-        require($vues['vuephp1']);
     }
 
 }

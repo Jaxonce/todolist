@@ -1,6 +1,6 @@
 <?php
 
-class Tache
+class Task
 {
     private int $id;
     private string $nom;

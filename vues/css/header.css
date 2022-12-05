@@ -1,0 +1,8 @@
+.allCard{
+    display: flex;
+    
+}
+
+.card-block{
+    border-top: 1px solid;
+}
