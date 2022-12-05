@@ -18,6 +18,12 @@ class UserControl{
                     $this->addPublicList();
                     $action = NULL;
                     break;
+                case 'inscription':
+                    $this->inscriptionPage();
+                    break;
+                case 'connexion':
+                    $this->connexionPage();
+                    break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
                     require($rep.$vues['erreur']);
@@ -47,6 +53,20 @@ class UserControl{
             exit();
         }
 
+    }
+
+    function inscriptionPage() : void
+    {
+        global $vues;
+
+        require($vues['inscription']);
+    }
+
+    function connexionPage() : void
+    {
+        global $vues;
+
+        require($vues['connexion']);
     }
 
 }

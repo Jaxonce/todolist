@@ -21,7 +21,7 @@
                             <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Private lists </a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
-                        </form><span class="navbar-text"> <a href="" class="login">Log In</a></span>
+                        </form><span class="navbar-text"> <a href="?action=connexion" class="login">Log In</a></span>
                         <a class="btn btn-light action-button" role="button" href="?action=inscription">Sign Up</a>
                     </div>
                 </div>
