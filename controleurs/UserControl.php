@@ -19,6 +19,9 @@ class UserControl{
                     $this->addPublicList();
                     $action = NULL;
                     break;
+                case 'ajoutTache':
+                    $this->addTask();
+                    break;
                 case 'supprimerListe':
                     $this->deletePublicList();
                     $action = NULL;
@@ -44,21 +47,20 @@ class UserControl{
         $this->mdl->deletePublicList($id);
         header('Location: index.php');
 
-        }
+    }
+    
 
     public function displayPublicList(){
         global $vues;
-        $mdl = new Model();
         $todoListPublic=array();
 
-        $todoListPublic=$mdl->getListPublic();
+        $todoListPublic=$this->mdl->getListPublic();
         require($vues['vuephp1']);
     }
 
     public function addPublicList(){
-        $mdl = new Model();
         $name=$_REQUEST['nameNewListPublic'];
-        $mdl->addList($name,0);
+        $this->mdl->addList($name,0);
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'ajoutListe') {
             // do the insert
             /* redirect after the insert */

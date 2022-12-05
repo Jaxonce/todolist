@@ -50,11 +50,11 @@
                             echo $uneliste->getNom();
                             ?>
                         </h6>
-                        <form class="d-flex justify-content-center align-items-center mb-4">
+                        <form method="post" action="?action=ajoutTache">
                             <div class="form-outline flex-fill">
-                                <input type="text" id="form3" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3">What do you need to do today?</label>
+                                <input type="text" id="TitreTache" class="form-control form-control-lg" />
                             </div>
+                            <input type="hidden" name="idList" value="<?php echo $uneliste->getId()?>" />
                             <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
                         </form>
                         <ul class="list-group mb-0">
@@ -66,9 +66,11 @@
                                     <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
                                     <p><?php echo $uneTache->getNom(); ?></p>
                                 </div>
-                                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                                    <i class="fas fa-times text-primary"></i>
-                                </a>
+                                <form method="post" action="?action=supprimerTache">
+                                    <input type="hidden" name="idTache" value="<?php echo $uneTache->getId()?>" />
+                                    <input type="hidden" name="listeId" value="<?php echo $uneTache->getListeId()?>" />
+                                    <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer la tache ?');" >Supprimer</button>
+                                </form>
                             </li>
                             <?php
                             }
