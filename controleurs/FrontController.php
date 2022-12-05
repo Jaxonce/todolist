@@ -11,7 +11,7 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeActionUser = ['inscription', 'connexion' ];
+            $listeActionUser = ['a', 'b' ];
             $action = $_REQUEST['action'];
 
             if(in_array($action, $listeActionUser)){

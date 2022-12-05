@@ -32,6 +32,12 @@ class VisitorControl{
                 case 'connexion':
                     $this->connexionPage();
                     break;
+                case 'inscription':
+                    $this->inscriptionPage();
+                    break;
+                case 'connexion':
+                    $this->connexionPage();
+                    break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
                     require($rep.$vues['erreur']);
@@ -39,6 +45,19 @@ class VisitorControl{
         }catch(Exception $e){
             echo $e->getMessage();
         }
+    }
+    
+
+    function inscriptionPage() : void
+    {
+        global $vues;
+        require($vues['inscription']);
+    }
+
+    function connexionPage() : void
+    {
+        global $vues;
+        require($vues['connexion']);
     }
     
     public function displayPublicList(){
