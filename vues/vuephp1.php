@@ -41,7 +41,7 @@
             foreach ($todoListPublic as $uneliste) {
         ?>
                 <div>
-                    <form method="post" action="?action=supprimerListe">
+                    <form method="post" action="?action=supprimerListePublic">
                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId()?>" />
                         <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer ?');" >Supprimer</button>
                     </form>

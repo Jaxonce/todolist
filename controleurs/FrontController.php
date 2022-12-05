@@ -11,17 +11,17 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeAction = ['login', 'add' ];
-            $admin = ModelAdmin::isAdmin();
+            $listeActionUser = ['inscription', 'connexion' ];
             $action = $_REQUEST['action'];
 
-            if(in_array($action, $listeAction)){
+            if(in_array($action, $listeActionUser)){
+                $user = ModelUser::isUser();
                 if($admin == null){
                     require ($rep.$vues['authentification']);
                 }
                 else new AdminController();
             }
-            else new UserControl();
+            else new VisitorControl();
 
         }catch (Exception $e){
             require ($rep.$vues['erreur']);

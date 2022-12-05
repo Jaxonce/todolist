@@ -31,12 +31,20 @@ class UserGateway
         ));
     }
 
-    public function verifConnection(string $nom, string $mot_de_passe): ?Utilisateur
+    public function getCredentials(string $nom):
     {
-        $query = 'SELECT * FROM utilisateur WHERE nom=:nom AND mot_de_passe=:mot_de_passe';
+        $query = 'SELECT password FROM utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
-            ':nom' => array($nom, PDO::PARAM_STR),
-            ':mot_de_passe' => array($mot_de_passe, PDO::PARAM_STR)
+            ':nom' => array($nom, PDO::PARAM_STR)
+        ));
+        return $this->con->getResults();
+    }
+
+    public function getInfo(string $nom):
+    {
+        $query = 'SELECT id, prenom, email FROM utilisateur WHERE nom=:nom';
+        $this->con->executeQuery($query, array(
+            ':nom' => array($nom, PDO::PARAM_STR)
         ));
         return $this->con->getResults();
     }
