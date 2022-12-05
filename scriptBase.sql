@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS Tache, Utilisateur, Liste;
+DROP TABLE IF EXISTS Task,Liste,Utilisateur;
 
 CREATE TABLE Utilisateur (
     id bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
