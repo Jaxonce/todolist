@@ -29,9 +29,9 @@
             </nav>
         </div>
     </header>
-    <form method="post" action="?action=ajoutListe">
+    <form method="post" action="?action=ajoutListePublic">
         <input type="text" id="form3" name="nameNewListPublic" />
-        <button type="submit">Add</button>
+        <button type="submit" >Add</button>
     </form>
     <div>
         <?php

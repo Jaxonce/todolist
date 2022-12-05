@@ -12,7 +12,6 @@ class Model
 
         $g=new ListeGateway(new Connection($dsn,$login,$mdp));
         $publicListFromDB=$g->getAllPublic();
-
         $g=new TaskGateway(new Connection($dsn,$login,$mdp));
         foreach ($publicListFromDB as $tabList) {
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
@@ -56,6 +55,17 @@ class Model
             $g=new ListeGateway(new Connection($dsn,$login,$mdp));
             $liste = new Liste(0, $nom, 0, $userId);
             $g->insert($liste);
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function addPublicList(string $nom) : void
+    {
+        global $dsn, $login, $mdp;
+        try{
+            $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+            $liste = new Liste(0, $nom, 0,0);
+            $g->insertPublic($liste);
         }catch (Exception $e){
             echo $e->getMessage();
         }

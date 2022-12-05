@@ -13,7 +13,7 @@ CREATE TABLE Liste (
    nom varchar(50) NOT NULL,
    dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   possesseur bigint(20) UNSIGNED DEFAULT 0,
+   possesseur bigint(20) UNSIGNED DEFAULT NULL,
    FOREIGN KEY (possesseur) REFERENCES Utilisateur(id),
    PRIMARY KEY (id)
 );

@@ -15,7 +15,7 @@ class UserControl{
                 case NULL:
                     $this->displayPublicList();
                     break;
-                case 'ajoutListe':
+                case 'ajoutListePublic':
                     $this->addPublicList();
                     $action = NULL;
                     break;
@@ -60,13 +60,10 @@ class UserControl{
 
     public function addPublicList(){
         $name=$_REQUEST['nameNewListPublic'];
-        $this->mdl->addList($name,0);
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'ajoutListe') {
-            // do the insert
-            /* redirect after the insert */
-            header('Location: index.php');
-            exit();
-        }
+        $this->mdl->addPublicList($name);
+        header('Location: index.php');
+        exit();
+        
 
     }
 

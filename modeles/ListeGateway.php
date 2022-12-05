@@ -10,6 +10,14 @@ class ListeGateway
         $this->con = $con;
     }
 
+    public function insertPublic(Liste $liste): void
+    {
+        $query = "INSERT INTO Liste (nom, possesseur) VALUES (:nom, NULL)";
+        $this->con->executeQuery($query, array(
+            ':nom' => array($liste->getNom(), PDO::PARAM_STR)
+        ));
+    }
+    
     public function insert(Liste $liste): void
     {
         $query = "INSERT INTO Liste (nom, possesseur) VALUES (:nom, :user_id)";
@@ -38,15 +46,15 @@ class ListeGateway
 
     public function deletePublicList(int $id): void
     {
-        $query = "DELETE FROM Liste WHERE id = :id AND possesseur = 0";
+        $query = "DELETE FROM Liste WHERE id = :id AND possesseur IS NULL";
         $this->con->executeQuery($query, array(
             ':id' => array($id, PDO::PARAM_INT)
         ));
     }
 
-    public function getAllPublic (): array
+    public function getAllPublic(): array
     {
-        $query = "SELECT * FROM Liste WHERE possesseur = 0";
+        $query = "SELECT * FROM Liste WHERE possesseur IS NULL";
         $this->con->executeQuery($query);
 
         $result = $this->con->getResults();
