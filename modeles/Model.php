@@ -60,6 +60,13 @@ class Model
             echo $e->getMessage();
         }
     }
+
+    public function deletePublicList(int $id) : void
+    {
+        global $dsn, $login, $mdp;
+        $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+        $g->deletePublicList($id);
+    }
 //
 //    public function updateList(int $id, string $nom) : void
 //    {

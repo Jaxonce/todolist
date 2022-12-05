@@ -36,9 +36,17 @@ class ListeGateway
         ));
     }
 
+    public function deletePublicList(int $id): void
+    {
+        $query = "DELETE FROM Liste WHERE id = :id AND possesseur = 0";
+        $this->con->executeQuery($query, array(
+            ':id' => array($id, PDO::PARAM_INT)
+        ));
+    }
+
     public function getAllPublic (): array
     {
-        $query = "SELECT * FROM Liste";
+        $query = "SELECT * FROM Liste WHERE possesseur = 0";
         $this->con->executeQuery($query);
 
         $result = $this->con->getResults();

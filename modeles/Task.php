@@ -9,6 +9,7 @@ class Task
     private string $dateCreation;
     private string $dateModification;
     private int $listeId;
+    
 
     public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification, int $listeId)
     {

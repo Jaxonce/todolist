@@ -40,8 +40,9 @@
             foreach ($todoListPublic as $uneliste) {
         ?>
                 <div class="card-block">
-                    <form>
-                        <button type="submit" class="btn btn-primary btn-lg ms-2">Supprimer</button>
+                    <form method="post" action="?action=supprimerListe">
+                        <input type="hidden" name="idList" value="<?php echo $uneliste->getId()?>" />
+                        <button type="submit" class="btn btn-primary btn-lg ms-2" onclick="return confirm('Voulez-vous vraiment supprimer ?');" >Supprimer</button>
                     </form>
                     <div class="card-body p-5">
                         <h6 class="mb-3">

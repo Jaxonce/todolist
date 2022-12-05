@@ -11,9 +11,9 @@ CREATE TABLE Utilisateur (
 CREATE TABLE Liste (
    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
    nom varchar(50) NOT NULL,
-   dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,,
-   dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,,
-   possesseur bigint(20) UNSIGNED DEFAULT NULL,
+   dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   possesseur bigint(20) UNSIGNED DEFAULT 0,
    FOREIGN KEY (possesseur) REFERENCES Utilisateur(id),
    PRIMARY KEY (id)
 );

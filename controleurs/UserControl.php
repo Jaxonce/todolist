@@ -2,6 +2,7 @@
 require_once('config/config.php');
 class UserControl{
     private Model $mdl;
+
     public function __construct(){
         global $vues,$rep;
         $this->mdl = new Model();
@@ -16,6 +17,10 @@ class UserControl{
                     break;
                 case 'ajoutListe':
                     $this->addPublicList();
+                    $action = NULL;
+                    break;
+                case 'supprimerListe':
+                    $this->deletePublicList();
                     $action = NULL;
                     break;
                 case 'inscription':
@@ -33,6 +38,14 @@ class UserControl{
             echo $e->getMessage();
         }
     }
+
+    public function deletePublicList(){
+        $id=$_REQUEST['idList'];
+        $this->mdl->deletePublicList($id);
+        header('Location: index.php');
+
+        }
+
     public function displayPublicList(){
         global $vues;
         $mdl = new Model();
@@ -45,7 +58,7 @@ class UserControl{
     public function addPublicList(){
         $mdl = new Model();
         $name=$_REQUEST['nameNewListPublic'];
-        $mdl->addList($name,1);
+        $mdl->addList($name,0);
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'ajoutListe') {
             // do the insert
             /* redirect after the insert */
