@@ -13,9 +13,17 @@ class Model
         $g=new ListeGateway(new Connection($dsn,$login,$mdp));
         $publicListFromDB=$g->getAllPublic();
 
+        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
         foreach ($publicListFromDB as $tabList) {
+            $tasksTmp = $g->getTachesByListeId($tabList['id']);
+            $tasks = array();
+            foreach ($tasksTmp as $task) {
+                $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId']);
+            }
+            
+            // var_dump($taches);
+            $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification']?? 0,$tabList['possesseur']??0, $tasks);
 
-            $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification']?? 0,$tabList['possesseur']??0);
 
         }
         return $tab;

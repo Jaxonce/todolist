@@ -11,21 +11,21 @@ CREATE TABLE Utilisateur (
 CREATE TABLE Liste (
    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
    nom varchar(50) NOT NULL,
-   dateCreation date NOT NULL DEFAULT NOW(),
-   dateModification date NOT NULL DEFAULT NOW(),
+   dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,,
+   dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,,
    possesseur bigint(20) UNSIGNED DEFAULT NULL,
    FOREIGN KEY (possesseur) REFERENCES Utilisateur(id),
    PRIMARY KEY (id)
 );
 
 
-CREATE TABLE Tache (
+CREATE TABLE Task (
    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
    nom varchar(50) NOT NULL,
    descriptionTache varchar(200) DEFAULT NULL,
    importance numeric(1) NOT NULL,
-   dateCreation date NOT NULL DEFAULT NOW(),
-   dateModification date NOT NULL DEFAULT NOW(),
+   dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    listeId bigint(20) UNSIGNED NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (listeId) REFERENCES Liste(id)
@@ -39,7 +39,7 @@ INSERT INTO Liste(nom, possesseur) VALUES
     ('Liste du mois', NULL);
 
 
-INSERT INTO Tache(nom, descriptionTache, importance,listeID) VALUES
+INSERT INTO Task(nom, descriptionTache, importance,listeID) VALUES
     ('Faire le ménage', 'Faire le ménage de la maison', 1,(SELECT id FROM Liste WHERE nom = 'Liste de course')),
     ('Faire les courses', 'Faire les courses de la semaine', 3,(SELECT id FROM Liste WHERE nom = 'Liste de course')),
     ('Faire le repas', 'Faire le repas du soir', 2,(SELECT id FROM Liste WHERE nom = 'Liste de course')),

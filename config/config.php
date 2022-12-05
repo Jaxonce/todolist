@@ -12,7 +12,7 @@ $rep=__DIR__.'/../';
 //BD
 
 $dsn="mysql:host=localhost;dbname=TO_DO_LIST";
-$login="malanone";
+$login="trbarlet";
 $mdp="azertyuiop";
 
 //Vues

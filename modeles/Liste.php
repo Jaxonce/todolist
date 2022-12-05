@@ -6,13 +6,15 @@ class Liste
     private string $nom;
     private string $dateModification;
     private int $userId;
+    private array $taches;
 
-    public function __construct(int $id, string $nom, string $dateModification, int $userId)
+    public function __construct(int $id, string $nom, string $dateModification, int $userId, array $taches = array())
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->dateModification = $dateModification;
         $this->userId = $userId;
+        $this->taches = $taches;
     }
 
     public function getId() : int
@@ -39,5 +41,11 @@ class Liste
     {
         return $this->userId;
     }
+
+    public function getTaches() : array
+    {
+        return $this->taches;
+    }
+
 }
 
