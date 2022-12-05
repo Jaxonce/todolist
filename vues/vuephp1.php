@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="./vues/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="./vues/css/style.css" />
 </head>
 <body>
     <header>
@@ -29,48 +30,46 @@
         </div>
     </header>
     <form method="post" action="?action=ajoutListe">
-        <input type="text" id="form3" class="form-control form-control-lg" name="nameNewListPublic" />
-        <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
+        <input type="text" id="form3" name="nameNewListPublic" />
+        <button type="submit">Add</button>
     </form>
-    <div class="allCard">
+    <div>
         <?php
         if (!isset($todoListPublic)) {
             echo "Pas de liste";
         } else {
             foreach ($todoListPublic as $uneliste) {
         ?>
-                <div class="card-block">
+                <div>
                     <form method="post" action="?action=supprimerListe">
                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId()?>" />
-                        <button type="submit" class="btn btn-primary btn-lg ms-2" onclick="return confirm('Voulez-vous vraiment supprimer ?');" >Supprimer</button>
+                        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer ?');" >Supprimer</button>
                     </form>
-                    <div class="card-body p-5">
-                        <h6 class="mb-3">
+                    <div>
+                        <h6>
                             <?php
                             echo $uneliste->getNom();
                             ?>
                         </h6>
-                        <form method="post" action="?action=ajoutTache">
-                            <div class="form-outline flex-fill">
-                                <input type="text" id="TitreTache" class="form-control form-control-lg" />
+                        <form>
+                            <div>
+                                <input type="text" id="form3" />
+                                <label for="form3">What do you need to do today?</label>
                             </div>
-                            <input type="hidden" name="idList" value="<?php echo $uneliste->getId()?>" />
-                            <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
+                            <button type="submit">Add</button>
                         </form>
-                        <ul class="list-group mb-0">
+                        <ul>
                             <?php 
                             foreach ($uneliste->getTaches() as $uneTache) {
                             ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                    <p><?php echo $uneTache->getNom(); ?></p>
+                            <li>
+                                <div>
+                                    <input type="checkbox" value="" aria-label="..." id="strikethrough"/>
+                                    <span id="strikethrough-text"><?php echo $uneTache->getNom(); ?></span>
                                 </div>
-                                <form method="post" action="?action=supprimerTache">
-                                    <input type="hidden" name="idTache" value="<?php echo $uneTache->getId()?>" />
-                                    <input type="hidden" name="listeId" value="<?php echo $uneTache->getListeId()?>" />
-                                    <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer la tache ?');" >Supprimer</button>
-                                </form>
+                                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                                    supprimer
+                                </a>
                             </li>
                             <?php
                             }
