@@ -7,4 +7,5 @@ require_once(__DIR__.'/config/config.php');
 require_once(__DIR__.'/config/AutoLoader.php');
 Autoload::charger();
 
-$controleurs= new UserControl();
+session_start();
+$controleurs= new FrontController();
