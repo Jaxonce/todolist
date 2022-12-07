@@ -26,8 +26,9 @@ class ModelUser
 
     }
 
-    public static function isUser(){
-        if (isset($_SESSION['login']) && isset($_SESSION['role'] && $_SESSION['prenom'] && $_SESSION['email'] && $_SESSION["id"])){
+    public static function isUser(): ?User
+    {
+        if (isset($_SESSION['login']) && isset($_SESSION['role']) && isset($_SESSION['prenom']) && isset($_SESSION['email']) && isset($_SESSION["id"])){
             $login=Clean::cleanString($_SESSION['login']);
             $role=Clean::cleanString($_SESSION['role']);
             $prenom=Clean::cleanString($_SESSION['prenom']);
@@ -37,8 +38,8 @@ class ModelUser
             if ($role=='user'){
                 return new User($id,$login, $prenom, $email);
             }
-        } else
-            return null;
+        }
+        return null;
 
     }
 }

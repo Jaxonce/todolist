@@ -6,15 +6,16 @@ class Clean
     {
 
 
-        // Vérification du type de l'input
-        if (is_string($string)) {
-            // Traitement de l'input
-        } else {
+        if (! is_string($string))
+        {
             throw new Exception("Clean::cleanString() : \$string n'est pas une chaîne de caractères");      
         }
         
         // Nettoyage de l'input
         $string = filter_var($string, FILTER_SANITIZE_STRING);
+        $string = strip_tags($string);
+
+
         return $string;
     }
 

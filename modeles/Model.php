@@ -77,6 +77,29 @@ class Model
         $g=new ListeGateway(new Connection($dsn,$login,$mdp));
         $g->deletePublicList($id);
     }
+
+    public function addPublicTask (int $listeId,String $nom) : void
+    {
+        global $dsn, $login, $mdp;
+        try{
+            $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+            $nom = Clean::cleanString($nom);
+
+            if (strlen($nom) > 0) {
+                $task = new Task(0, $nom, "description", 0, 0, 0, $listeId);
+                $g->insertPublic($task);
+            }
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function deletePublicTask(int $id) : void
+    {
+        global $dsn, $login, $mdp;
+        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        $g->deletePublicTask($id);
+    }
 //
 //    public function updateList(int $id, string $nom) : void
 //    {

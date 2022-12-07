@@ -26,11 +26,8 @@ class VisitorControl{
                     $this->deletePublicList();
                     $action = NULL;
                     break;
-                case 'inscription':
-                    $this->inscriptionPage();
-                    break;
-                case 'connexion':
-                    $this->connexionPage();
+                case 'supprimerTachePublic':
+                    $this->deletePublicTask();
                     break;
                 case 'inscription':
                     $this->inscriptionPage();
@@ -82,9 +79,15 @@ class VisitorControl{
 
     public function addPublicTask(){
         $idList=$_REQUEST['idList'];
-        $name=$_REQUEST['nameNewTaskPublic'];
+        $name=$_REQUEST['nameTask'];
+        var_dump($idList);
         $this->mdl->addPublicTask($idList,$name);
         header('Location: index.php');
     }
-        
+
+        public function deletePublicTask(){
+        $idTask=$_REQUEST['idTask'];
+        $this->mdl->deletePublicTask($idTask);
+        header('Location: index.php');
+    }
 }

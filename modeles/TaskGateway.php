@@ -52,6 +52,27 @@ class TaskGateway
         $this->con->executeQuery($query, $parameters);
     }
 
+    public function insertPublic(Task $task)
+    {
+        $query = "INSERT INTO Task (nom, descriptionTache, importance, listeId) VALUES (:nom, :descriptionTache, :importance, :listeId)";
+        $parameters = [
+            ":nom" => [$task->getNom(), PDO::PARAM_STR],
+            ":descriptionTache" => [$task->getDescriptionTache(), PDO::PARAM_STR],
+            ":importance" => [$task->getImportance(), PDO::PARAM_INT],
+            ":listeId" => [$task->getListeId(), PDO::PARAM_INT]
+        ];
+        $this->con->executeQuery($query, $parameters);
+    }
+
+    public function deletePublicTask(int $id)
+    {
+        $query = "DELETE FROM Task WHERE id = :id AND listeId IN (SELECT id FROM Liste WHERE possesseur IS NULL)";
+        $parameters = [
+            ":id" => [$id, PDO::PARAM_INT]
+        ];
+        $this->con->executeQuery($query, $parameters);
+    }
+
 }
 
 
