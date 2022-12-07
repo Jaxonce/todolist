@@ -34,21 +34,23 @@
             </nav>
         </div>
     </header>
-    <form method="post" action="?action=ajoutListePublic">
-        <input type="text" id="form3" name="nameNewListPublic" />
-        <button type="submit">Add</button>
+    <form method="post" action="?action=ajoutListePublic" style="display:flex!important;align-items:center; justify-content: center;">
+        <input placeholder="Add new list..." type="text" id="form3" name="nameNewListPublic" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;"/>
+        <button class="btn btn-primary" style="margin-right:10px;" type="submit">Add</button>
     </form>
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col">
+
+                <div class="col" style="margin-bottom:300px!important">
                     <?php
                     if (!isset($todoListPublic)) {
                         throw new Exception("La liste n'existe pas");
                     } else {
-                        foreach ($todoListPublic as $uneliste) {
+                    foreach ($todoListPublic as $uneliste) {
                     ?>
-                            <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+                            <div class="card" style="border-radius: .75rem; background-color: #eff1f2;">
+
                                 <div class="card-body py-4 px-4 px-md-5">
 
                                     <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
@@ -92,14 +94,15 @@
                                         </select>
                                         <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i class="fas fa-sort-amount-down-alt ms-2"></i></a>
                                     </div>
-                                    <?php
-                                    foreach ($uneliste->getTaches() as $uneTache) {
-                                    ?>
-                                        <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                                    <div class="test">
+                                        <?php
+                                        foreach ($uneliste->getTaches() as $uneTache) {
+                                            ?>
+                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
                                             <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
-                                                
-                                                    <!-- <input class="strikethrough form-check-input me-0 " type="checkbox" value="" id="" aria-label="..." /> -->
-                                                
+
+                                                <!-- <input class="strikethrough form-check-input me-0 " type="checkbox" value="" id="" aria-label="..." /> -->
+
                                                 <input type="checkbox" value="" aria-label="..." class="strikethrough form-check-input" />
                                                 <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
                                             </li>
@@ -118,16 +121,18 @@
                                                 </div>
                                             </li>
 
-                                        </ul><?php
-                                            }
-                                                ?>
+                                            </ul><?php
+                                        }
+                                        ?>
+                                    </div>
+
                                 </div>
+                                <?php
+                                }
+                                }
+                                ?>
                             </div>
                 </div>
-        <?php
-                        }
-                    }
-        ?>
             </div>
         </div>
     </section>

@@ -31,7 +31,7 @@ class UserGateway
         ));
     }
 
-    public function getCredentials(string $nom):
+    public function getCredentials(string $nom)
     {
         $query = 'SELECT password FROM utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
@@ -40,7 +40,7 @@ class UserGateway
         return $this->con->getResults();
     }
 
-    public function getInfo(string $nom):
+    public function getInfo(string $nom)
     {
         $query = 'SELECT id, prenom, email FROM utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
