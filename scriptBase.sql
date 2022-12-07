@@ -14,7 +14,7 @@ CREATE TABLE Liste (
    dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    possesseur bigint(20) UNSIGNED DEFAULT NULL,
-   FOREIGN KEY (possesseur) REFERENCES Utilisateur(id),
+   FOREIGN KEY (possesseur) REFERENCES Utilisateur(id) ON DELETE CASCADE,
    PRIMARY KEY (id)
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE Task (
    dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    listeId bigint(20) UNSIGNED NOT NULL,
    PRIMARY KEY (id),
-   FOREIGN KEY (listeId) REFERENCES Liste(id)
+   FOREIGN KEY (listeId) REFERENCES Liste(id) ON DELETE CASCADE
 );
 
 INSERT INTO Utilisateur(nom, prenom, email, password) VALUES

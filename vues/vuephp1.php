@@ -35,7 +35,7 @@
         </div>
     </header>
     <form method="post" action="?action=ajoutListePublic" style="display:flex!important;align-items:center; justify-content: center;">
-        <input placeholder="Add new list..." type="text" id="form3" name="nameNewListPublic" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;"/>
+        <input required placeholder="Add new list..." type="text" id="form3" name="nameNewListPublic" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;"/>
         <button class="btn btn-primary" style="margin-right:10px;" type="submit">Add</button>
     </form>
     <section class="vh-100">
@@ -69,11 +69,14 @@
                                     <div class="pb-2">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new..." style="margin-right:10px">
-                                                    <div>
-                                                        <button type="button" class="btn btn-primary">Add</button>
-                                                    </div>
+                                                <div>
+                                                    <form method="post" action="?action=ajoutTachePublic" class="d-flex flex-row align-items-center" >
+                                                        <input required name="nameTask" type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new..." style="margin-right:10px ">
+                                                        <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">Add</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +115,10 @@
                                             <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                                 <div class="d-flex flex-row justify-content-end mb-1">
                                                     <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                                                    <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
+                                                    <form method="post" action="?action=supprimerTachePublic" class="boutonSupp" style="background: transparent;">
+                                                        <input type="hidden" name="idTask" value="<?php echo $uneTache->getId() ?>" />
+                                                        <button style="background: transparent ; border: none" type="submit" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo" ><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
                                                 </div>
                                                 <div class="text-end text-muted">
                                                     <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
