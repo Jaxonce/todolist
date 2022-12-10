@@ -3,10 +3,12 @@ require_once('config/config.php');
 
 class VisitorControl{
     private Model $mdl;
+    private ModelUser $mdlUser;
 
     public function __construct(){
         global $vues,$rep;
         $this->mdl = new Model();
+        $this->mdlUser = new ModelUser();
 
         try {
             $action=$_REQUEST['action'];
@@ -32,8 +34,14 @@ class VisitorControl{
                 case 'inscription':
                     $this->inscriptionPage();
                     break;
+                case 'inscriptionUser':
+                    $this->inscriptionUser();
+                    break;
                 case 'connexion':
                     $this->connexionPage();
+                    break;
+                case 'connexionUser':
+                    $this->connexionUser();
                     break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
@@ -85,9 +93,30 @@ class VisitorControl{
         header('Location: index.php');
     }
 
-        public function deletePublicTask(){
+    public function deletePublicTask(){
         $idTask=$_REQUEST['idTask'];
         $this->mdl->deletePublicTask($idTask);
+        header('Location: index.php');
+    }
+
+    public function inscriptionUser(){
+        $nom = Clean::cleanString($_POST['nom']);
+        $prenom = Clean::cleanString($_POST['prenom']);
+        $email = Clean::cleanMail($_POST['email']);
+        $mdpUser = Clean::cleanString($_POST['password']);
+        if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password']))
+            if ($nom != "" && $prenom != "" && $email != "" && $mdpUser != ""){
+                $this->mdlUser->inscription($nom,$prenom,$email,$mdpUser);
+            }
+        header('Location: index.php');
+    }
+    public function connexionUser(){
+        $email = Clean::cleanMail($_POST['email']);
+        $mdpUser = Clean::cleanString($_POST['password']);
+        if (isset($_POST['email']) && isset($_POST['password']))
+            if ($email != "" && $mdpUser != ""){
+                $this->mdlUser->connexion($email,$mdpUser);
+            }
         header('Location: index.php');
     }
 }

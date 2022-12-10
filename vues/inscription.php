@@ -34,17 +34,17 @@
                         <div class="card">
                             <div class="card-body py-5 px-md-5">
 
-                                <form method="post" action="php/verif.php">
+                                <form method="post" action="?action=inscriptionUser">
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1" class="form-control" />
+                                                <input type="text" id="form3Example1" class="form-control" name="prenom" />
                                                 <label class="form-label" for="form3Example1">First name</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example2" class="form-control" />
+                                                <input type="text" id="form3Example2" class="form-control" name="nom"/>
                                                 <label class="form-label" for="form3Example2">Last name</label>
                                             </div>
                                         </div>

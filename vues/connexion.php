@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-body py-5 px-md-5">
 
-                            <form method="post" action="php/verif.php">
+                            <form method="post" action="?action=connexionUser">
 
                                 <div class="form-outline mb-4">
                                     <input id="email" class="form-control" name="email"/>

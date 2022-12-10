@@ -9,18 +9,28 @@ class UserGateway
         $this->con = $con;
     }
 
-    public function insert(Utilisateur $utilisateur)
+    public function insert(User $utilisateur, string $mdp )
     {
-        $query = 'INSERT INTO utilisateur (nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)';
+        $query = 'INSERT INTO utilisateur (nom, prenom, email, password) VALUES (:nom, :prenom, :email, :mot_de_passe)';
         $this->con->executeQuery($query, array(
             ':nom' => array($utilisateur->getNom(), PDO::PARAM_STR),
             ':prenom' => array($utilisateur->getPrenom(), PDO::PARAM_STR),
             ':email' => array($utilisateur->getEmail(), PDO::PARAM_STR),
-            ':mot_de_passe' => array($utilisateur->getMotDePasse(), PDO::PARAM_STR)
+            ':mot_de_passe' => array($mdp, PDO::PARAM_STR)
         ));
     }
 
-    public function update(Utilisateur $utilisateur)
+    public function exists(string $email)
+    {
+        $query = 'SELECT COUNT(*) FROM utilisateur WHERE email=:email';
+        $this->con->executeQuery($query, array(
+            ':email' => array($email, PDO::PARAM_STR)
+        ));
+        var_dump($this->con->getResults());
+        return $this->con->getResults()[0][0] > 0;
+    }
+
+    public function update(User $utilisateur)
     {
         $query = 'UPDATE utilisateur SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id';
         $this->con->executeQuery($query, array(
@@ -31,21 +41,21 @@ class UserGateway
         ));
     }
 
-    public function getCredentials(string $nom)
+    public function getCredentials(string $email)
     {
-        $query = 'SELECT password FROM utilisateur WHERE nom=:nom';
+        $query = 'SELECT password FROM utilisateur WHERE email=:email';
         $this->con->executeQuery($query, array(
-            ':nom' => array($nom, PDO::PARAM_STR)
+            ':email' => array($email, PDO::PARAM_STR)
         ));
         return $this->con->getResults();
     }
 
-    public function getInfo(string $nom)
+    public function getInfo(string $email)
     {
-        $query = 'SELECT id, prenom, email FROM utilisateur WHERE nom=:nom';
+        $query = 'SELECT id, nom, prenom, email FROM utilisateur WHERE email=:email';
         $this->con->executeQuery($query, array(
-            ':nom' => array($nom, PDO::PARAM_STR)
+            ':email' => array($email, PDO::PARAM_STR)
         ));
-        return $this->con->getResults();
+        return $this->con->getResults()[0];
     }
 }
