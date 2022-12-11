@@ -69,4 +69,23 @@ class ListeGateway
         ));
         return $this->con->getResults();
     }
+
+    public function getListPublic($currentPage, $nbListeParPage): array
+    {
+        $query = "SELECT * FROM Liste WHERE possesseur IS NULL LIMIT :premier, :nbListeParPage";
+        $this->con->executeQuery($query, array(
+            ':premier' => array(($currentPage - 1) * $nbListeParPage, PDO::PARAM_INT),
+            ':nbListeParPage' => array($nbListeParPage, PDO::PARAM_INT)
+        ));
+        $result = $this->con->getResults();
+        return $result;
+    }
+
+    public function getNbListPublic(): int
+    {
+        $query = "SELECT COUNT(*) FROM Liste WHERE possesseur IS NULL";
+        $this->con->executeQuery($query);
+        $result = $this->con->getResults();
+        return $result[0][0];
+    }
 }

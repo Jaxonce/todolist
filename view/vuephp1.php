@@ -41,6 +41,24 @@
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="pagination_section">
+                    <?php if ($pageActuelle > 1) { ?>
+                        <a href="?page=<?php echo $pageActuelle - 1    ?>">
+                            << Précedent</a>
+                            <?php }
+                        for ($i = 1; $i <= $nbPages; $i++) {
+                            if ($i == $pageActuelle) {
+                                echo $i . ' ';
+                            } else {
+                                echo '<a href="?page=' . $i . '">' . $i . '</a> ';
+                            }
+                        }
+
+                        if ($pageActuelle < $nbPages) { ?>
+                                <a href="?page=<?php echo $pageActuelle + 1    ?>">Suivant >></a>
+                            <?php } ?>
+
+                </div>
                 <?php
                 if (!isset($todoListPublic)) {
                     throw new Exception("La liste n'existe pas");
@@ -104,18 +122,18 @@
                                             <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width:-webkit-fill-available;">
                                                 <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
 
-                                                    
+
 
                                                     <input type="checkbox" value="" aria-label="..." class="strikethrough form-check-input" />
                                                     <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
                                                 </li>
-                                                
+
                                                 <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                                     <div class="d-flex flex-row justify-content-end mb-1">
                                                         <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
                                                         <form method="post" action="?action=supprimerTachePublic" class="boutonSupp" style="background: transparent;">
                                                             <input type="hidden" name="idTask" value="<?php echo $uneTache->getId() ?>" />
-                                                            <button style="background: transparent ; border: none" type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette tache ?');"  class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
+                                                            <button style="background: transparent ; border: none" type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette tache ?');" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
                                                         </form>
                                                     </div>
                                                     <div class="text-end text-muted">

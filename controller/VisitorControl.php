@@ -60,9 +60,18 @@ class VisitorControl{
     
     public function displayPublicList(){
         global $vues;
-        $todoListPublic=array();
+        // $todoListPublic=array();
+        $nbListeTotal=$this->mdl->getNbListPublic();
+        $nbListeParPage=2;
+        $nbPages=ceil($nbListeTotal/$nbListeParPage);
 
-        $todoListPublic=$this->mdl->getListPublic();
+        // $todoListPublic=$this->mdl->getListPublic();
+        if (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) {
+            $pageActuelle = (int) Clean::cleanInt($_REQUEST['page']);
+        } else {
+            $pageActuelle = 1;
+        }
+        $todoListPublic=$this->mdl->getListPublic($pageActuelle,$nbListeParPage);
         require($vues['vuephp1']);
     }
 
