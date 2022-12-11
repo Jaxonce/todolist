@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS Task,Liste,Utilisateur;
 CREATE TABLE Utilisateur (
     id bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nom varchar(50) NOT NULL,
-    prenom varchar(50) NOT NULL,
     email varchar(50) NOT NULL,
     password varchar(256) NOT NULL
 );
@@ -31,8 +30,8 @@ CREATE TABLE Task (
    FOREIGN KEY (listeId) REFERENCES Liste(id) ON DELETE CASCADE
 );
 
-INSERT INTO Utilisateur(nom, prenom, email, password) VALUES
-    ('Dupont', 'Jean', 'dupontJean@gmail.com', '1234');
+INSERT INTO Utilisateur(nom, email, password) VALUES
+    ('Jean', 'dupontJean@gmail.com', '1234');
 
 INSERT INTO Liste(nom, possesseur) VALUES
     ('Liste de course', (SELECT id FROM Utilisateur WHERE nom = 'Dupont')),

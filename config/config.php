@@ -17,7 +17,7 @@ $mdp="azertyuiop";
 
 //Vues
 
-$vues['erreur']='vues/erreur.php';
-$vues['vuephp1']='vues/vuephp1.php';
-$vues['inscription']='vues/inscription.php';
-$vues['connexion']='vues/connexion.php';
+$vues['erreur']='view/erreur.php';
+$vues['vuephp1']='view/vuephp1.php';
+$vues['inscription']='view/inscription.php';
+$vues['connexion']='view/connexion.php';
