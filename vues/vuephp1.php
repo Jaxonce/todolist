@@ -41,6 +41,25 @@
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
+                
+                <div class="pagination_section">
+                    <?php if ($pageActuelle > 1) { ?>
+                        <a href="?page=<?php echo $pageActuelle-1    ?>"><< Précedent</a>
+                    <?php }
+                    for ($i = 1; $i <= $nbPages; $i++) {
+                        if ($i == $pageActuelle) {
+                            echo $i . ' ';
+                        } else {
+                            echo '<a href="?page=' . $i . '">' . $i . '</a> ';
+                        }
+                    }
+
+                    if ($pageActuelle < $nbPages) { ?>
+                        <a href="?page=<?php echo $pageActuelle+1    ?>">Suivant >></a>
+                    <?php } ?>
+
+                </div>
+
 
                 <div class="col" style="margin-bottom:300px!important">
                     <?php

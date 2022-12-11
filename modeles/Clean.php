@@ -21,12 +21,6 @@ class Clean
 
     public static function cleanInt(int $int) : int
     {
-        // Vérification du type de l'input
-        if (is_int($int)) {
-            // Traitement de l'input
-        } else {
-            throw new Exception("Clean::cleanInt() : \$int n'est pas un entier");      
-        }
         
         // Nettoyage de l'input
         $int = filter_var($int, FILTER_SANITIZE_NUMBER_INT);

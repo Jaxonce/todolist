@@ -5,13 +5,13 @@ require_once "ListeGateway.php";
 
 class Model
 {
-    public function getListPublic() : iterable // $page ?
+    public function getListPublic($currentPage, $nbListeParPage) : iterable // $page ?
     {
         global $dsn, $login, $mdp;
         $tab = array();
 
         $g=new ListeGateway(new Connection($dsn,$login,$mdp));
-        $publicListFromDB=$g->getAllPublic();
+        $publicListFromDB=$g->getListPublic($currentPage, $nbListeParPage);
         $g=new TaskGateway(new Connection($dsn,$login,$mdp));
         foreach ($publicListFromDB as $tabList) {
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
@@ -26,6 +26,14 @@ class Model
 
         }
         return $tab;
+    }
+
+    public function getNbListPublic() : int
+    {
+        global $dsn, $login, $mdp;
+        $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+        $nbListeTotal=$g->getNbListPublic();
+        return $nbListeTotal;
     }
 
 //    public function getListByUserId(int $userId) : array
