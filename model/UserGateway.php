@@ -35,12 +35,13 @@ class UserGateway
         $this->con->executeQuery($query, array(
             ':nom' => array($nom, PDO::PARAM_STR)
         ));
-        return $this->con->getResults()[0];
+        $result = $this->con->getResults();
+        return $result[0]['password'];
     }
 
     public function getInfo(string $nom)
     {
-        $query = 'SELECT id, prenom, email FROM utilisateur WHERE nom=:nom';
+        $query = 'SELECT id, email FROM utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
             ':nom' => array($nom, PDO::PARAM_STR)
         ));

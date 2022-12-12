@@ -35,6 +35,9 @@ class VisitorControl{
                 case 'connexion':
                     $this->connexionPage();
                     break;
+                case 'connexionUser':
+                    $this->connexionUser();
+                    break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
                     require($rep.$vues['erreur']);
@@ -75,6 +78,15 @@ class VisitorControl{
         require($vues['vuephp1']);
     }
 
+    // documentation de la fonction displayPublicList
+    // affiche la liste des listes publiques
+    // paramètres : aucun
+    // résultat : aucun
+    // effets de bord : aucun
+    // préconditions : aucun
+    // postconditions : aucun
+    // remarques : aucun
+
     public function deletePublicList(){
         $id=$_REQUEST['idList'];
         $this->mdl->deletePublicList($id);
@@ -99,5 +111,21 @@ class VisitorControl{
         $idTask=$_REQUEST['idTask'];
         $this->mdl->deletePublicTask($idTask);
         header('Location: index.php');
+    }
+
+    public function connexionUser(){
+        global $vues;
+        $mdlUser=new ModelUser();
+        $username = $_REQUEST['username'];
+        var_dump($username);
+        $user = $mdlUser->connexion($username, $_REQUEST['password']);
+        echo " ici";
+        var_dump($user);
+        if($user == null){
+            require($vues['connexion']);
+        }
+        else{
+            require($vues['vuephp1']);
+        }
     }
 }

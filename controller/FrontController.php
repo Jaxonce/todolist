@@ -12,8 +12,9 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeActionUser = ['connexionUser', 'b' ];
+            $listeActionUser = ['deconnexionUser', 'b' ];
             $action = $_REQUEST['action'];
+            var_dump($action);
 
             if(in_array($action, $listeActionUser)){
                 $user = ModelUser::isUser();

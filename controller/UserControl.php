@@ -30,16 +30,5 @@ class UserControl
         }
     }
 
-    public function connexionUser(){
-        global $vues;
-        $username = $_REQUEST['username'];
-        var_dump($username);
-        $user = $this->mdlUser->connexion($username, $_REQUEST['password']);
-        if($user == null){
-            require($vues['connexion']);
-        }
-        else{
-            require($vues['accueil']);
-        }
-    }
+    
 }
