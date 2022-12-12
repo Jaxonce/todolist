@@ -8,14 +8,14 @@ class ModelUser
         $g = new UserGateway(new Connection($dsn, $login, $mdp));
         $username = Clean::cleanString($username);
         $password = Clean::cleanString($password);
-        if ($password == $g->getCredentials($username))
+        $passwordInDb = $g->getCredentials($username);
+        if (isset($passwordInDb[0]['password']) && password_verify($password, $passwordInDb[0]['password']))
         {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = 'user';
             $info = $g->getInfo($username)[0];
             $_SESSION['email'] = $info['email'];
             $_SESSION['id'] = $info['id'];
-            var_dump($info);
             return new User($info['id'], $username, $info['email']);
         }
         return null;
@@ -36,5 +36,17 @@ class ModelUser
         }
         return null;
 
+    }
+
+    public function getListePrive(int $id) : array
+    {
+        global $dsn, $login, $mdp;
+        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        $listes = $g->getPrivateList($id);
+        $arrayListe = array();
+        foreach ($listes as $liste) {
+            $arrayListe[] = new Liste($liste['id'], $liste['nom'], $liste['dateModification'], $liste['userId']);
+        }
+        return $arrayListe;
     }
 }

@@ -9,7 +9,10 @@ class VisitorControl{
         $this->mdl = new Model();
 
         try {
-            $action=$_REQUEST['action'];
+            if (isset($_REQUEST['action'])){
+                $action = $_REQUEST['action'];
+            }
+            else $action = NULL;
 
             switch($action){
                 case NULL:
@@ -121,6 +124,8 @@ class VisitorControl{
         echo " ici";
         var_dump($user);
         if($user == null){
+            $erreurConnexion = "Erreur de connexion";
+                
             require($vues['connexion']);
         }
         else{
