@@ -117,15 +117,12 @@ class VisitorControl{
         global $vues;
         $mdlUser=new ModelUser();
         $username = $_REQUEST['username'];
-        var_dump($username);
         $user = $mdlUser->connexion($username, $_REQUEST['password']);
-        echo " ici";
-        var_dump($user);
         if($user == null){
             require($vues['connexion']);
         }
         else{
-            require($vues['vuephp1']);
+            $this->displayPublicList();
         }
     }
 }

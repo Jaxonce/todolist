@@ -15,11 +15,10 @@ class UserControl
 
             switch ($action) {
                 case NULL:
-                    $this->displayPublicList();
+                    
                     break;
-                case 'connexionUser':
+                case 'deconnexionUser':
                     echo "jesuis bien dans UserControl";
-//                    $this->connexionUser();
                     break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
