@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/header.css"/>
+    <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 
 
@@ -34,29 +35,21 @@
                         <div class="card">
                             <div class="card-body py-5 px-md-5">
 
-                                <form method="post" action="?action=verif">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="text" id="form3Example1" class="form-control" required/>
-                                                <label class="form-label" for="form3Example1">First name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="text" id="form3Example2" class="form-control" required/>
-                                                <label class="form-label" for="form3Example2">Last name</label>
-                                            </div>
+                                <form method="post" action="?action=inscriptionUser">
+                                    <div class="form-outline mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="form3Example1" name="username" class="form-control" required />
+                                            <label class="form-label" for="form3Example1">Username</label>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input id="email" class="form-control" name="email" type="email" required/>
+                                        <input id="email" class="form-control" name="email" type="email" required />
                                         <label class="form-label" for="email">Email address</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input id="password" class="form-control" name="password" type="password" required/>
+                                        <input id="password" class="form-control" name="password" type="password" required />
                                         <label class="form-label" for="password">Password</label>
                                     </div>
 
@@ -77,4 +70,5 @@
         </div>
     </section>
 </body>
+
 </html>

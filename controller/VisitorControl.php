@@ -35,6 +35,9 @@ class VisitorControl{
                 case 'inscription':
                     $this->inscriptionPage();
                     break;
+                case 'inscriptionUser':
+                    $this->inscriptionUser();
+                    break;
                 case 'connexion':
                     $this->connexionPage();
                     break;
@@ -127,6 +130,26 @@ class VisitorControl{
         }
         else{
             $this->displayPublicList();
+        }
+    }
+
+    public function inscriptionUser(){
+        global $vues;
+        $mdlUser=new ModelUser();
+        $username = $_REQUEST['username'];
+        var_dump($username);
+        $email = $_REQUEST['email'];
+        var_dump($email);
+        $password = $_REQUEST['password'];
+        var_dump($password);
+        $user = $mdlUser->inscription($username, $email, $password);
+        if($user == null){
+            $erreurConnexion = "Erreur d'inscription";
+                
+            require($vues['inscription']);
+        }
+        else{
+            $this->connexionUser();
         }
     }
 }

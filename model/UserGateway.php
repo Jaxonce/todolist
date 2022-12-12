@@ -9,13 +9,13 @@ class UserGateway
         $this->con = $con;
     }
 
-    public function insert(User $utilisateur)
+    public function insert(string $nom, string $email, string $mot_de_passe)
     {
-        $query = 'INSERT INTO utilisateur (nom, email, mot_de_passe) VALUES (:nom, :email, :mot_de_passe)';
+        $query = 'INSERT INTO utilisateur (nom, email, password) VALUES (:nom, :email, :mot_de_passe)';
         $this->con->executeQuery($query, array(
-            ':nom' => array($utilisateur->getNom(), PDO::PARAM_STR),
-            ':email' => array($utilisateur->getEmail(), PDO::PARAM_STR),
-            ':mot_de_passe' => array($utilisateur->getPassword(), PDO::PARAM_STR)
+            ':nom' => array($nom, PDO::PARAM_STR),
+            ':email' => array($email, PDO::PARAM_STR),
+            ':mot_de_passe' => array($mot_de_passe, PDO::PARAM_STR)
         ));
     }
 

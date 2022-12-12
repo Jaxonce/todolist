@@ -22,6 +22,18 @@ class ModelUser
 
     }
 
+    public function inscription($username, $email, $password) :?User
+    {
+        global $dsn, $login, $mdp;
+        $g = new UserGateway(new Connection($dsn, $login, $mdp));
+        $username = Clean::cleanString($username);
+        $email = Clean::cleanMail($email);
+        $password = Clean::cleanString($password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $g->insert($username, $email, $password);
+        return $this->connexion($username, $password);
+    }
+
     public static function isUser(): ?User
     {
         if (isset($_SESSION['username']) && isset($_SESSION['role']) && isset($_SESSION['email']) && isset($_SESSION["id"])){

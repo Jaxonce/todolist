@@ -14,11 +14,11 @@ class FrontController{
         try{
             $listeActionUser = ['deconnexionUser', 'afficherListePrive' ];
             
-            if (isset($_REQUEST['action'])){
+            if (isset($_REQUEST['action']))
+            {
                 $action = $_REQUEST['action'];
             }
             else $action = NULL;
-
             if(in_array($action, $listeActionUser)){
                 $user = ModelUser::isUser();
                 if($user == null){
@@ -26,6 +26,7 @@ class FrontController{
                 }
                 else new UserControl();
             }
+            
             else new VisitorControl();
 
         }catch (Exception $e){
