@@ -39,8 +39,7 @@ class VisitorControl{
                     $this->connexionUser();
                     break;
                 default:
-                    $dVueErreur[] = "Erreur d'appel php";
-                    require($rep.$vues['erreur']);
+                    throw new Exception("Action non valide");
             }
         }catch(Exception $e){
             echo $e->getMessage();

@@ -31,7 +31,7 @@ CREATE TABLE Task (
 );
 
 INSERT INTO Utilisateur(nom, email, password) VALUES
-    ('Jean', 'dupontJean@gmail.com', '1234');
+    ('malanone', 'dupontJean@gmail.com', '1234');
 
 INSERT INTO Liste(nom, possesseur) VALUES
     ('Liste de course', (SELECT id FROM Utilisateur WHERE nom = 'Dupont')),

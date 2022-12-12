@@ -12,7 +12,7 @@ class ModelUser
         {
             setcookie('role', 'user', time()+365*24*3600);
             setcookie('username', $username, time()+365*24*3600);
-            $info = $g->getInfo($username);
+            $info = $g->getInfo($username)[0];
             setcookie('email', $info['email'], time()+365*24*3600);
             setcookie('id', $info['id'], time()+365*24*3600);
             var_dump($info);
