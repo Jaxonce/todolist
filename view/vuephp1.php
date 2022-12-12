@@ -23,8 +23,8 @@
                 <div class="container"><a class="navbar-brand" href="#"> ToDoListApp</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Public lists </a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Private lists </a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=NULL"> Public lists </a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=afficherListePrive"> Private lists </a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
                         </form><span class="navbar-text"> <a href="?action=connexion" class="login">Log In</a></span>

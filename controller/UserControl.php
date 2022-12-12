@@ -8,17 +8,20 @@ class UserControl
     public function __construct()
     {
         global $vues, $rep;
-        $this->mdl = new ModelUser();
+        $this->mdlUser = new ModelUser();
         $dVueErreur = array();
         try {
-            $action = $_REQUEST['action'];
+            
+            if (isset($_REQUEST['action'])) {
+                $action = $_REQUEST['action'];
+            } else $action = NULL;
 
             switch ($action) {
                 case NULL:
                     
                     break;
-                case 'deconnexionUser':
-                    echo "jesuis bien dans UserControl";
+                case 'afficherListePrive':
+                    $this->displayPrivateList();
                     break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
@@ -27,6 +30,15 @@ class UserControl
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function displayPrivateList() : void
+    {
+        global $vues;
+        $user = ModelUser::isUser();
+        
+        $listes = $this->mdlUser->getListePrive($user->getId());
+        require($vues['listePrive']);
     }
 
     

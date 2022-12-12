@@ -36,7 +36,7 @@ class UserGateway
             ':nom' => array($nom, PDO::PARAM_STR)
         ));
         $result = $this->con->getResults();
-        return $result[0]['password'];
+        return $result;
     }
 
     public function getInfo(string $nom)

@@ -8,13 +8,14 @@ class ModelUser
         $g = new UserGateway(new Connection($dsn, $login, $mdp));
         $username = Clean::cleanString($username);
         $password = Clean::cleanString($password);
-        if ($password == $g->getCredentials($username))
+        $passwordInDb = $g->getCredentials($username);
+        if (isset($passwordInDb[0]['password']) && password_verify($password, $passwordInDb[0]['password']))
         {
-            setcookie('role', 'user', time()+365*24*3600);
-            setcookie('username', $username, time()+365*24*3600);
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = 'user';
             $info = $g->getInfo($username)[0];
-            setcookie('email', $info['email'], time()+365*24*3600);
-            setcookie('id', $info['id'], time()+365*24*3600);
+            $_SESSION['email'] = $info['email'];
+            $_SESSION['id'] = $info['id'];
             return new User($info['id'], $username, $info['email']);
         }
         return null;
@@ -23,11 +24,11 @@ class ModelUser
 
     public static function isUser(): ?User
     {
-        if (isset($_COOKIE['username']) && isset($_COOKIE['role']) && isset($_COOKIE['email']) && isset($_COOKIE["id"])){
-            $username=Clean::cleanString($_COOKIE['username']);
-            $role=Clean::cleanString($_COOKIE['role']);
-            $email=Clean::cleanMail($_COOKIE['email']);
-            $id=Clean::cleanInt($_COOKIE['id']);
+        if (isset($_SESSION['username']) && isset($_SESSION['role']) && isset($_SESSION['email']) && isset($_SESSION["id"])){
+            $username=Clean::cleanString($_SESSION['username']);
+            $role=Clean::cleanString($_SESSION['role']);
+            $email=Clean::cleanMail($_SESSION['email']);
+            $id=Clean::cleanInt($_SESSION['id']);
             
             if ($role=='user'){
                 return new User($id, $username, $email);
@@ -35,5 +36,17 @@ class ModelUser
         }
         return null;
 
+    }
+
+    public function getListePrive(int $id) : array
+    {
+        global $dsn, $login, $mdp;
+        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        $listes = $g->getPrivateList($id);
+        $arrayListe = array();
+        foreach ($listes as $liste) {
+            $arrayListe[] = new Liste($liste['id'], $liste['nom'], $liste['dateModification'], $liste['userId']);
+        }
+        return $arrayListe;
     }
 }

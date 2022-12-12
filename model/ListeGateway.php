@@ -61,13 +61,16 @@ class ListeGateway
         return $result;
     }
 
-    public function getAllByUserId (int $possesseur): array
+    public function getPrivateList (int $possesseur, $currentPage, $nbListeParPage): array
     {
-        $query = "SELECT * FROM Liste WHERE possesseur = :possesseur";
+        $query = "SELECT * FROM Liste WHERE possesseur = :possesseur LIMIT :premier, :nbListeParPage";
         $this->con->executeQuery($query, array(
-            ':possesseur' => array($possesseur, PDO::PARAM_INT)
+            ':possesseur' => array($possesseur, PDO::PARAM_INT),
+            ':premier' => array(($currentPage - 1) * $nbListeParPage, PDO::PARAM_INT),
+            ':nbListeParPage' => array($nbListeParPage, PDO::PARAM_INT)
         ));
-        return $this->con->getResults();
+        $result = $this->con->getResults();
+        return $result;
     }
 
     public function getListPublic($currentPage, $nbListeParPage): array

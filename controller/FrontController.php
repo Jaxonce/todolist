@@ -12,12 +12,15 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeActionUser = ['deconnexionUser', 'b' ];
-            $action = $_REQUEST['action'];
+            $listeActionUser = ['deconnexionUser', 'afficherListePrive' ];
+            
+            if (isset($_REQUEST['action'])){
+                $action = $_REQUEST['action'];
+            }
+            else $action = NULL;
 
             if(in_array($action, $listeActionUser)){
                 $user = ModelUser::isUser();
-                var_dump($user);
                 if($user == null){
                     require ($rep.$vues['connexion']);
                 }
