@@ -124,7 +124,7 @@ class VisitorControl{
             require($vues['connexion']);
         }
         else{
-            require($vues['vuephp1']);
+            $this->displayPublicList();
         }
     }
 }
