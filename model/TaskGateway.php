@@ -21,15 +21,6 @@ class TaskGateway
         $this->con->executeQuery($query, $parameters);
     }
 
-    public function supprimerTache(int $id): void
-    {
-        $query = "DELETE FROM Task WHERE id = :id";
-        $parameters = [
-            ":id" => [$id, PDO::PARAM_INT]
-        ];
-        $this->con->executeQuery($query, $parameters);
-    }
-
     public function getTachesByListeId(int $listeId): array
     {
         $query = "SELECT * FROM Task WHERE listeId = :listeId";
@@ -69,6 +60,16 @@ class TaskGateway
         $query = "DELETE FROM Task WHERE id = :id AND listeId IN (SELECT id FROM Liste WHERE possesseur IS NULL)";
         $parameters = [
             ":id" => [$id, PDO::PARAM_INT]
+        ];
+        $this->con->executeQuery($query, $parameters);
+    }
+
+    public function delete(int $idUser, int $idTask)
+    {
+        $query = "DELETE FROM Task WHERE id = :id AND listeId IN (SELECT id FROM Liste WHERE possesseur = :idUser)";
+        $parameters = [
+            ":id" => [$idTask, PDO::PARAM_INT],
+            ":idUser" => [$idUser, PDO::PARAM_INT]
         ];
         $this->con->executeQuery($query, $parameters);
     }

@@ -18,6 +18,9 @@ class VisitorControl{
                 case NULL:
                     $this->displayPublicList();
                     break;
+                case 'afficherListePublic':
+                    $this->displayPublicList();
+                    break;
                 case 'ajoutListePublic':
                     $this->addPublicList();
                     $action = NULL;
@@ -68,19 +71,18 @@ class VisitorControl{
     
     public function displayPublicList(){
         global $vues;
-        // $todoListPublic=array();
         $nbListeTotal=$this->mdl->getNbListPublic();
         $nbListeParPage=2;
         $nbPages=ceil($nbListeTotal/$nbListeParPage);
+        $type= "Public";
 
-        // $todoListPublic=$this->mdl->getListPublic();
         if (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) {
             $pageActuelle = (int) Clean::cleanInt($_REQUEST['page']);
         } else {
             $pageActuelle = 1;
         }
-        $todoListPublic=$this->mdl->getListPublic($pageActuelle,$nbListeParPage);
-        require($vues['vuephp1']);
+        $todoList=$this->mdl->getListPublic($pageActuelle,$nbListeParPage);
+        require($vues['vueListe']);
     }
 
     // documentation de la fonction displayPublicList
@@ -99,7 +101,7 @@ class VisitorControl{
     }          
 
     public function addPublicList(){
-        $name=$_REQUEST['nameNewListPublic'];
+        $name=$_REQUEST['nomListe'];
         $this->mdl->addPublicList($name);
         header('Location: index.php');
     }

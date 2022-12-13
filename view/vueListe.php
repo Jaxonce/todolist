@@ -23,19 +23,25 @@
                 <div class="container"><a class="navbar-brand" href="#"> ToDoListApp</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=NULL"> Public lists </a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=afficherListePublic"> Public lists </a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="?action=afficherListePrive"> Private lists </a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
-                        </form><span class="navbar-text"> <a href="?action=connexion" class="login">Log In</a></span>
-                        <a class="btn btn-light action-button" role="button" href="?action=inscription">Sign Up</a>
+                        </form>
+                        <?php if(! isset($_SESSION["role"])) { ?>
+                            <span class="navbar-text"> <a href="?action=connexion" class="login">Log In</a></span>
+                            <a class="btn btn-light action-button" role="button" href="?action=inscription">Sign Up</a>
+                        <?php } else { ?>
+                            <span class="navbar-text"> <a href="?action=deconnexion" class="login">Deconnexion</a></span>
+                            <span ><?php echo $_SESSION["username"]; ?>  </span>
+                        <?php } ?>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
-    <form method="post" action="?action=ajoutListePublic" style="display:flex!important;align-items:center; justify-content: center;">
-        <input required placeholder="Add new list..." type="text" id="form3" name="nameNewListPublic" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;" />
+    <form method="post" action="?action=ajoutListe<?php echo $type; ?>" style="display:flex!important;align-items:center; justify-content: center;">
+        <input required placeholder="Add new list..." type="text" id="form3" name="nomListe" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;" />
         <button class="btn btn-primary" style="margin-right:10px;" type="submit">Add</button>
     </form>
     <section class="vh-100">
@@ -46,11 +52,13 @@
                         <a href="?page=<?php echo $pageActuelle - 1    ?>">
                             << Précedent</a>
                             <?php }
-                        for ($i = 1; $i <= $nbPages; $i++) {
-                            if ($i == $pageActuelle) {
-                                echo $i . ' ';
-                            } else {
-                                echo '<a href="?page=' . $i . '">' . $i . '</a> ';
+                        if ($nbPages != 1) {
+                            for ($i = 1; $i <= $nbPages; $i++) {
+                                if ($i == $pageActuelle) {
+                                    echo $i . ' ';
+                                } else {
+                                    echo '<a href="?page=' . $i . '">' . $i . '</a> ';
+                                }
                             }
                         }
 
@@ -60,10 +68,10 @@
 
                 </div>
                 <?php
-                if (!isset($todoListPublic)) {
+                if (!isset($todoList)) {
                     throw new Exception("La liste n'existe pas");
                 } else {
-                    foreach ($todoListPublic as $uneliste) {
+                    foreach ($todoList as $uneliste) {
                 ?>
                         <div class="col" style="margin-bottom:20px!important">
 
@@ -76,7 +84,7 @@
                                         <u> <?php
                                             echo $uneliste->getNom();
                                             ?></u>
-                                    <form method="post" action="?action=supprimerListePublic" class="boutonSupp" style="background: transparent;">
+                                    <form method="post" action="?action=supprimerListe<?php echo $type; ?> " class="boutonSupp" style="background: transparent;">
                                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
                                         <button type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette liste ? Les taches associées seront également supprimées.');" style="background : transparent; border : none">
                                             <img onmouseover="onImageDelete.call(this)" onmouseout="outImageDelete.call(this)" src="./view/assets/bin_empty.svg" />
@@ -88,7 +96,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div>
-                                                    <form method="post" action="?action=ajoutTachePublic" class="d-flex flex-row align-items-center">
+                                                    <form method="post" action="?action=ajoutTache<?php echo $type; ?>" class="d-flex flex-row align-items-center">
                                                         <input required name="nameTask" type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new..." style="margin-right:10px ">
                                                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
                                                         <div>
@@ -131,7 +139,7 @@
                                                 <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                                     <div class="d-flex flex-row justify-content-end mb-1">
                                                         <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                                                        <form method="post" action="?action=supprimerTachePublic" class="boutonSupp" style="background: transparent;">
+                                                        <form method="post" action="?action=supprimerTache<?php echo $type; ?>" class="boutonSupp" style="background: transparent;">
                                                             <input type="hidden" name="idTask" value="<?php echo $uneTache->getId() ?>" />
                                                             <button style="background: transparent ; border: none" type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette tache ?');" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
                                                         </form>
