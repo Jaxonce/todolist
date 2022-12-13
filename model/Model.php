@@ -31,38 +31,7 @@ class Model
         $nbListeTotal=$g->getNbListPublic();
         return $nbListeTotal;
     }
-
-//    public function getListByUserId(int $userId) : array
-//    {
-//        global $base, $login, $mdp;
-//        $g=new ListeGateway(new Connection($base,$login,$mdp));
-//        $result = $g->getAllByUserId($userId);
-//        foreach ($result as $row) {
-//            $tabList[] = new Liste($row['id'], $row['nom'], $row['dateModification'], $userId);
-//        }
-//        return $tabList;
-//    }
-//
-//    public function getListById(int $id) : Liste
-//    {
-//        global $base, $login, $mdp;
-//        $g=new ListeGateway(new Connection($base,$login,$mdp));
-//        $result = $g->getById($id);
-//        $liste = new Liste($result['id'], $result['nom'], $result['dateModification'], $result['possesseur']);
-//        return $liste;
-//    }
-//
-    public function addList(string $nom, int $userId) : void
-    {
-        global $dsn, $login, $mdp;
-        try{
-            $g=new ListeGateway(new Connection($dsn,$login,$mdp));
-            $liste = new Liste(0, $nom, 0, $userId);
-            $g->insert($liste);
-        }catch (Exception $e){
-            echo $e->getMessage();
-        }
-    }
+    
     public function addPublicList(string $nom) : void
     {
         global $dsn, $login, $mdp;

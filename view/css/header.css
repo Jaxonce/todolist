@@ -214,7 +214,3 @@
     transform:rotate(-19deg);
     opacity:0.2;
 }
-
-.strikethrough:checked + .strikethrough-text {
-    text-decoration:line-through;
-}

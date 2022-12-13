@@ -15,6 +15,11 @@
 
 
 <body style="background-color: #ececec!important;">
+    <div class="d-flex justify-content-end">
+        <a href="index.php">
+            <img src="./view/assets/close.svg" />
+        </a>
+    </div>
     <section class="mainSection" style="margin-top: 15vh;">
         <div class="px-4 py-5 px-md-5 text-center text-lg-start">
             <div class="container">
@@ -33,23 +38,23 @@
 
                     <div class="col-lg-6 mb-5 mb-lg-0">
                         <div class="card">
-                            <div class="card-body py-5 px-md-5">
+                            <div class="card-body py-5 px-md-5" style="background-color: #ececec!important; border: 1px solid #2f435e!important; border-radius: 0.25em">
 
-                                <form method="post" action="?action=inscriptionUser">
+                                <form method="post" action="?action=inscriptionUser" style="background-color: #ececec!important; border-color:#2f435e!important">
                                     <div class="form-outline mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="form3Example1" name="username" class="form-control" required />
+                                            <input type="text" id="form3Example1" name="username" class="form-control" required style="background-color: #ececec!important; border-color:#2f435e"/>
                                             <label class="form-label" for="form3Example1">Nom d'utilisateur</label>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input id="email" class="form-control" name="email" type="email" required />
+                                        <input id="email" class="form-control" name="email" type="email" required style="background-color: #ececec!important; border-color:#2f435e"/>
                                         <label class="form-label" for="email">Addresse mail</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input id="password" class="form-control" name="password" type="password" required />
+                                        <input id="password" class="form-control" name="password" type="password" required style="background-color: #ececec!important; border-color:#2f435e"/>
                                         <label class="form-label" for="password">Mot de passe</label>
                                     </div>
 

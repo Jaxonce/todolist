@@ -76,7 +76,7 @@ class TaskGateway
 
     public function changeDone(int $idTask)
     {
-        $query = "UPDATE Task SET done = NOT done WHERE id = :id";
+        $query = "UPDATE Task SET fait = NOT fait WHERE id = :id";
         $parameters = [
             ":id" => [$idTask, PDO::PARAM_INT]
         ];

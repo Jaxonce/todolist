@@ -2,7 +2,7 @@ html{
     
 }
 
-.strikethrough:checked + .strikethrough-text span{
+.strikethrough:checked +  .strikethrough-text span{
     text-decoration:line-through;
 }
 
@@ -88,3 +88,13 @@ html{
     align-items: center;
     justify-content: center;
 }
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+

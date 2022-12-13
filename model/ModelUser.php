@@ -91,7 +91,7 @@ class ModelUser
         }
     }
 
-    public function addListePrive(int $id,String $nom) : void
+    public function addListePrive(int $id, String $nom) : void
     {
         global $dsn, $login, $mdp;
         $g = new ListeGateway(new Connection($dsn, $login, $mdp));

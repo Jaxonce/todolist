@@ -25,8 +25,8 @@
                 <div class="container"><a class="navbar-brand" href="#"> ToDoListApp</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=afficherListePublic"> Liste public </a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="?action=afficherListePrive"> Liste privée </a></li>
+                            <li class="nav-item" role="presentation"><a style="<?php if($type=='Public') {echo "color: #fff; font-weight: bold";}?>" class="nav-link" href="?action=afficherListePublic"> Liste public </a></li>
+                            <li class="nav-item" role="presentation"><a style="<?php if($type=='Prive') {echo "color: #fff; font-weight: bold";}?>" class="nav-link" href="?action=afficherListePrive"> Liste privée </a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
                         </form>
@@ -53,47 +53,27 @@
                     <ul class="pagination">
                         <li class="page-item">
                         <?php if ($pageActuelle > 1) {
-                            echo '<a class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle - 1) . '">Précedent</a>';
+                            echo '<a style="color: #2f435e!important" class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle - 1) . '">Précedent</a>';
                         } ?>
                         </li>
                         <?php
                         if ($nbPages != 1) {
                             for ($i = 1; $i <= $nbPages; $i++) {
                                 if ($i == $pageActuelle) {
-                                    echo '<li class="page-item active" aria-current="page"><a class="page-link" href="#">' . $i . '</a></li>';
+                                    echo '<li class="page-item active" aria-current="page"><a style="background-color: #2f435e!important" class="page-link" href="#">' . $i . '</a></li>';
                                 } else {
-                                    echo '<li class="page-item"><a class="page-link" href="?action=afficherListe'.$type.'&page=' . $i . '">' . $i . '</a></li>';
+                                    echo '<li class="page-item"><a style="color: #2f435e!important" class="page-link" href="?action=afficherListe'.$type.'&page=' . $i . '">' . $i . '</a></li>';
                                 }
                             }
                         }
                         ?>
                         <li class="page-item">
                             <?php if ($pageActuelle < $nbPages) {
-                                echo '<a class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle + 1) . '">Suivant</a>';
+                                echo '<a style="color: #2f435e!important" class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle + 1) . '">Suivant</a>';
                             } ?>
                         </li>
                     </ul>
                 </nav>
-                <!-- <div class="pagination_section">
-                    <?php if ($pageActuelle > 1) { ?>
-                        <a href="?page=<?php echo $pageActuelle - 1 ?>">
-                            << Précedent</a>
-                            <?php }
-                        if ($nbPages != 1) {
-                            for ($i = 1; $i <= $nbPages; $i++) {
-                                if ($i == $pageActuelle) {
-                                    echo $i . ' ';
-                                } else {
-                                    echo '<a href="?page=' . $i . '">' . $i . '</a> ';
-                                }
-                            }
-                        }
-
-                        if ($pageActuelle < $nbPages) { ?>
-                                <a href="?page=<?php echo $pageActuelle + 1    ?>">Suivant >></a>
-                            <?php } ?>
-
-                </div> -->
                 <?php
                 if (!isset($todoList)) {
                     throw new Exception("La liste n'existe pas");
@@ -154,12 +134,11 @@
                                         <?php
                                         foreach ($uneliste->getTaches() as $uneTache) {
                                         ?>
-                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width:-webkit-fill-available; flex-direction:row; margin-bottom:20px">
+                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width:-webkit-fill-available; flex-direction:row; margin-top:20px">
                                                 <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
 
 
-
-                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" />
+                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)"/>
                                                     <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
                                                 </li>
 
@@ -206,6 +185,11 @@
 
         function outImageDelete() {
             this.setAttribute("src", "./view/assets/bin_empty.svg");
+        }
+
+        function updateBaseCheck(id) {
+            location.replace("?action=changeDone<?php echo $type?>&idTask=" + id);
+
         }
     </script>
 </body>
