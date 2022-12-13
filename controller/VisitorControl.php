@@ -107,7 +107,6 @@ class VisitorControl{
     public function addPublicTask(){
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
-        var_dump($idList);
         $this->mdl->addPublicTask($idList,$name);
         header('Location: index.php');
     }
@@ -137,15 +136,11 @@ class VisitorControl{
         global $vues;
         $mdlUser=new ModelUser();
         $username = $_REQUEST['username'];
-        var_dump($username);
         $email = $_REQUEST['email'];
-        var_dump($email);
         $password = $_REQUEST['password'];
-        var_dump($password);
         $user = $mdlUser->inscription($username, $email, $password);
         if($user == null){
-            $erreurConnexion = "Erreur d'inscription";
-                
+            $erreurConnexion = "Cet utilisateur existe deja";
             require($vues['inscription']);
         }
         else{

@@ -62,6 +62,11 @@
 
 
                                 </form>
+                                <?php
+                                if (isset($erreurConnexion)) {
+                                    echo '<div class="alert alert-danger" role="alert">' . $erreurConnexion . '</div>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

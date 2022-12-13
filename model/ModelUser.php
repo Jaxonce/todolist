@@ -29,8 +29,12 @@ class ModelUser
         $username = Clean::cleanString($username);
         $email = Clean::cleanMail($email);
         $password = Clean::cleanString($password);
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $g->insert($username, $email, $password);
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        try{
+            $g->insert($username, $email, $passwordHash);
+        }catch (Exception $e){
+            return null;
+        }
         return $this->connexion($username, $password);
     }
 

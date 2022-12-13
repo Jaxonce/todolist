@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS Task,Liste,Utilisateur;
 
 CREATE TABLE Utilisateur (
     id bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nom varchar(50) NOT NULL,
+    nom varchar(50) NOT NULL UNIQUE,
     email varchar(50) NOT NULL,
     password varchar(256) NOT NULL
 );
