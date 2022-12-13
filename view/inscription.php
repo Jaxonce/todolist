@@ -14,7 +14,7 @@
 </head>
 
 
-<body>
+<body style="background-color: #ececec!important;">
     <section class="mainSection" style="margin-top: 15vh;">
         <div class="px-4 py-5 px-md-5 text-center text-lg-start">
             <div class="container">
@@ -22,12 +22,12 @@
                     <div class="col-lg-6 mb-5 mb-lg-0">
 
 
-                        <h1 class="my-5 display-3 fw-bold ls-tight">
-                            The best ToDo app<br />
-                            <span class="text-primary">for you</span>
+                        <h1 class="my-5 display-3 fw-bold ls-tight" style="color: #2f435e">
+                            La meilleure ToDo app<br />
+                            <span class="text-primary">pour vous</span>
                         </h1>
                         <p style="color: hsl(217, 10%, 50.8%)">
-                            Online ToDoList for everybody
+                            ToDoList en ligne pour tout le monde
                         </p>
                     </div>
 
@@ -39,24 +39,24 @@
                                     <div class="form-outline mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="form3Example1" name="username" class="form-control" required />
-                                            <label class="form-label" for="form3Example1">Username</label>
+                                            <label class="form-label" for="form3Example1">Nom d'utilisateur</label>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input id="email" class="form-control" name="email" type="email" required />
-                                        <label class="form-label" for="email">Email address</label>
+                                        <label class="form-label" for="email">Addresse mail</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input id="password" class="form-control" name="password" type="password" required />
-                                        <label class="form-label" for="password">Password</label>
+                                        <label class="form-label" for="password">Mot de passe</label>
                                     </div>
 
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary btn-block mb-5" value="action">
-                                            Sign Up
+                                        <button type="submit" class="btn btn-primary btn-block mb-5" style="background-color: #2f435e; border-color:#2f435e" value="action">
+                                            S'inscrire
                                         </button>
                                     </div>
 

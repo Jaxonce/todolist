@@ -10,7 +10,7 @@
 </head>
 
 
-<body>
+<body style="background-color: #ececec!important;">
 <section class="mainSection" style="margin-top: 15vh;">
     <div class="px-4 py-5 px-md-5 text-center text-lg-start">
         <div class="container">
@@ -18,35 +18,35 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
 
 
-                    <h1 class="my-5 display-3 fw-bold ls-tight">
-                        Log<br />
-                        <span class="text-primary">in</span>
+                    <h1 class="my-5 display-3 fw-bold ls-tight" style="color: #2f435e">
+                        Connectez<br />
+                        <span class="text-primary">vous</span>
                     </h1>
                     <p style="color: hsl(217, 10%, 50.8%)">
-                        Online ToDoList for everybody
+                        ToDoList en ligne pour tout le monde
                     </p>
                 </div>
 
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="card">
-                        <div class="card-body py-5 px-md-5">
+                        <div class="card-body py-5 px-md-5" style="background-color: #ececec!important;">
 
-                            <form method="post" action="?action=connexionUser">
+                            <form method="post" action="?action=connexionUser" style="background-color: #ececec!important;">
 
                                 <div class="form-outline mb-4">
-                                    <input id="username" class="form-control" name="username" type="text"/>
-                                    <label class="form-label" for="username">Username</label>
+                                    <input id="username" class="form-control" name="username" type="text" style="background-color: #ececec!important;"/>
+                                    <label class="form-label" for="username">Nom d'utilisateur</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input id="password" class="form-control" name="password" type="password"/>
-                                    <label class="form-label" for="password">Password</label>
+                                    <input id="password" class="form-control" name="password" type="password" style="background-color: #ececec!important;"/>
+                                    <label class="form-label" for="password">Mot de passe</label>
                                 </div>
 
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block mb-5" value="action">
-                                        Log in
+                                    <button type="submit" class="btn btn-primary btn-block mb-5" style="background-color: #2f435e; border-color:#2f435e" value="action">
+                                        Se connecter
                                     </button>
                                 </div>
                             </form>
@@ -55,7 +55,6 @@
                                 echo '<div class="alert alert-danger" role="alert">' . $erreurConnexion . '</div>';
                             }
                             ?>                       
-
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,7 @@
+html{
+    
+}
+
 .strikethrough:checked + .strikethrough-text span{
     text-decoration:line-through;
 }
