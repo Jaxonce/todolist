@@ -19,11 +19,7 @@ class Model
             foreach ($tasksTmp as $task) {
                 $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId']);
             }
-            
-            // var_dump($taches);
             $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification']?? 0,$tabList['possesseur']??0, $tasks);
-
-
         }
         return $tab;
     }
@@ -89,16 +85,12 @@ class Model
     public function addPublicTask (int $listeId,String $nom) : void
     {
         global $dsn, $login, $mdp;
-        try{
-            $g=new TaskGateway(new Connection($dsn,$login,$mdp));
-            $nom = Clean::cleanString($nom);
+        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        $nom = Clean::cleanString($nom);
 
-            if (strlen($nom) > 0) {
-                $task = new Task(0, $nom, "description", 0, 0, 0, $listeId);
-                $g->insertPublic($task);
-            }
-        }catch (Exception $e){
-            echo $e->getMessage();
+        if (strlen($nom) > 0) {
+            $task = new Task(0, $nom, "description", 0, 0, 0, $listeId);
+            $g->insertPublic($task);
         }
     }
 
@@ -108,20 +100,4 @@ class Model
         $g=new TaskGateway(new Connection($dsn,$login,$mdp));
         $g->deletePublicTask($id);
     }
-//
-//    public function updateList(int $id, string $nom) : void
-//    {
-//        global $base, $login, $mdp;
-//        $g=new ListeGateway(new Connection($base,$login,$mdp));
-//        $liste = new Liste($id, $nom, date("Y-m-d H:i:s"), 0);
-//        $g->update($liste);
-//    }
-//
-//    public function deleteList(int $id) : void
-//    {
-//        global $base, $login, $mdp;
-//        $g=new ListeGateway(new Connection($base,$login,$mdp));
-//        $liste = new Liste($id, "", date("Y-m-d H:i:s"), 0);
-//        $g->delete($liste);
-//    }
 }

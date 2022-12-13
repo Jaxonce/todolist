@@ -1,7 +1,4 @@
 <?php
-//Hash
-//password_verify ( string $password , string $hash ) : bool
-//password_hash ( string $password , int $algo [, array $options ] ) : string
 
 class FrontController{
     private ModelUser $mdl;
@@ -12,7 +9,7 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeActionUser = ['deconnexionUser', 'afficherListePrive' ];
+            $listeActionUser = ['deconnexion', 'afficherListePrive','ajoutTachePrive','ajoutListePrive','supprimerListePrive','supprimerTachePrive' ];
             
             if (isset($_REQUEST['action']))
             {

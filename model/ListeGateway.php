@@ -18,12 +18,12 @@ class ListeGateway
         ));
     }
     
-    public function insert(Liste $liste): void
+    public function insert(string $nom, int $userId): void
     {
-        $query = "INSERT INTO Liste (nom, possesseur) VALUES (:nom, :user_id)";
+        $query = "INSERT INTO Liste (nom, possesseur) VALUES (:nom, :possesseur)";
         $this->con->executeQuery($query, array(
-            ':nom' => array($liste->getNom(), PDO::PARAM_STR),
-            ':user_id' => array($liste->getUserId(), PDO::PARAM_INT)
+            ':nom' => array($nom, PDO::PARAM_STR),
+            ':possesseur' => array($userId, PDO::PARAM_INT)
         ));
     }
 
@@ -36,11 +36,12 @@ class ListeGateway
         ));
     }
 
-    public function delete(Liste $liste): void
+    public function delete(int $idUser, int $idListe): void
     {
-        $query = "DELETE FROM Liste WHERE id = :id";
+        $query = "DELETE FROM Liste WHERE id = :id AND possesseur = :possesseur";
         $this->con->executeQuery($query, array(
-            ':id' => array($liste->getId(), PDO::PARAM_INT)
+            ':id' => array($idListe, PDO::PARAM_INT),
+            ':possesseur' => array($idUser, PDO::PARAM_INT)
         ));
     }
 
@@ -88,6 +89,16 @@ class ListeGateway
     {
         $query = "SELECT COUNT(*) FROM Liste WHERE possesseur IS NULL";
         $this->con->executeQuery($query);
+        $result = $this->con->getResults();
+        return $result[0][0];
+    }
+
+    public function getNbPrivateList(int $possesseur): int
+    {
+        $query = "SELECT COUNT(*) FROM Liste WHERE possesseur = :possesseur";
+        $this->con->executeQuery($query, array(
+            ':possesseur' => array($possesseur, PDO::PARAM_INT)
+        ));
         $result = $this->con->getResults();
         return $result[0][0];
     }
