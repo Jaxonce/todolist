@@ -14,7 +14,7 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    
+
     <link rel="stylesheet" type="text/css" href="./view/css/style.css" />
 </head>
 
@@ -30,12 +30,12 @@
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
                         </form>
-                        <?php if(! isset($_SESSION["role"])) { ?>
+                        <?php if (!isset($_SESSION["role"])) { ?>
                             <span class="navbar-text"> <a href="?action=inscription" class="login">S'inscrire</a></span>
                             <a class="btn action-button" role="button" href="?action=connexion">Se connecter</a>
                         <?php } else { ?>
                             <span class="navbar-text"> <a href="?action=deconnexion" class="login">Deconnexion</a></span>
-                            <span class="btn action-button"><?php echo $_SESSION["username"]; ?>  </span>
+                            <span class="btn action-button"><?php echo $_SESSION["username"]; ?> </span>
                         <?php } ?>
                     </div>
                 </div>
@@ -49,9 +49,34 @@
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="pagination_section">
+                <nav aria-label="..." style="display: flex; justify-content: center">
+                    <ul class="pagination">
+                        <li class="page-item">
+                        <?php if ($pageActuelle > 1) {
+                            echo '<a class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle - 1) . '">Précedent</a>';
+                        } ?>
+                        </li>
+                        <?php
+                        if ($nbPages != 1) {
+                            for ($i = 1; $i <= $nbPages; $i++) {
+                                if ($i == $pageActuelle) {
+                                    echo '<li class="page-item active" aria-current="page"><a class="page-link" href="#">' . $i . '</a></li>';
+                                } else {
+                                    echo '<li class="page-item"><a class="page-link" href="?action=afficherListe'.$type.'&page=' . $i . '">' . $i . '</a></li>';
+                                }
+                            }
+                        }
+                        ?>
+                        <li class="page-item">
+                            <?php if ($pageActuelle < $nbPages) {
+                                echo '<a class="page-link" href="?action=afficherListe'.$type.'&page=' . ($pageActuelle + 1) . '">Suivant</a>';
+                            } ?>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- <div class="pagination_section">
                     <?php if ($pageActuelle > 1) { ?>
-                        <a href="?page=<?php echo $pageActuelle - 1    ?>">
+                        <a href="?page=<?php echo $pageActuelle - 1 ?>">
                             << Précedent</a>
                             <?php }
                         if ($nbPages != 1) {
@@ -68,7 +93,7 @@
                                 <a href="?page=<?php echo $pageActuelle + 1    ?>">Suivant >></a>
                             <?php } ?>
 
-                </div>
+                </div> -->
                 <?php
                 if (!isset($todoList)) {
                     throw new Exception("La liste n'existe pas");
@@ -84,8 +109,8 @@
                                     <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
                                         <i class="fas fa-check-square me-1" style="color: #2f435e"></i>
                                         <u style="color: #2f435e"> <?php
-                                            echo $uneliste->getNom();
-                                            ?></u>
+                                                                    echo $uneliste->getNom();
+                                                                    ?></u>
                                     <form method="post" action="?action=supprimerListe<?php echo $type; ?> " class="boutonSupp" style="background: transparent;">
                                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
                                         <button type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette liste ? Les taches associées seront également supprimées.');" style="background : transparent; border : none">
@@ -134,7 +159,7 @@
 
 
 
-                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px"/>
+                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" />
                                                     <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
                                                 </li>
 
