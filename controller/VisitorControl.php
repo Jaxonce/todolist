@@ -47,6 +47,9 @@ class VisitorControl{
                 case 'connexionUser':
                     $this->connexionUser();
                     break;
+                case 'changeDonePublic':
+                    $this->changeDonePublicTask();
+                    break;
                 default:
                     throw new Exception("Action non valide");
             }
@@ -148,5 +151,11 @@ class VisitorControl{
         else{
             $this->connexionUser();
         }
+    }
+
+    public function changeDonePublicTask(){
+        $idTask=$_REQUEST['idTask'];
+        $this->mdl->changeDonePublicTask($idTask);
+        header('Location: index.php');
     }
 }
