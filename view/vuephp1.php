@@ -24,7 +24,7 @@
 <body>
     <header>
         <div class="header-blue" style="padding: 0;">
-            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #0c63e4">
+            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #2f435e">
                 <div class="container"><a class="navbar-brand" href="#"> ToDoListApp</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav">
@@ -41,7 +41,7 @@
     </header>
     <form method="post" action="?action=ajoutListePublic" style="display:flex!important;align-items:center; justify-content: center;">
         <input required placeholder="Add new list..." type="text" id="form3" name="nameNewListPublic" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;" />
-        <button class="btn btn-primary" style="margin-right:10px;" type="submit">Add</button>
+        <button class="btn btn-primary" style="margin-right:10px; background-color: #2f435e" type="submit">Add</button>
     </form>
     <section class="vh-100">
         <div class="container py-5 h-100">
