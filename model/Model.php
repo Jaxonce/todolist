@@ -17,7 +17,7 @@ class Model
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
             $tasks = array();
             foreach ($tasksTmp as $task) {
-                $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId']);
+                $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId'], $task['fait']);
             }
             $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification']?? 0,$tabList['possesseur']??0, $tasks);
         }
@@ -89,7 +89,7 @@ class Model
         $nom = Clean::cleanString($nom);
 
         if (strlen($nom) > 0) {
-            $task = new Task(0, $nom, "description", 0, 0, 0, $listeId);
+            $task = new Task(0, $nom, "description", 0, 0, 0, $listeId, False);
             $g->insertPublic($task);
         }
     }
@@ -99,5 +99,12 @@ class Model
         global $dsn, $login, $mdp;
         $g=new TaskGateway(new Connection($dsn,$login,$mdp));
         $g->deletePublicTask($id);
+    }
+
+    public function changeDonePublicTask(int $id) : void
+    {
+        global $dsn, $login, $mdp;
+        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        $g->changeDone($id);
     }
 }

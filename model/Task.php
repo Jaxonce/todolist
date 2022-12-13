@@ -9,9 +9,10 @@ class Task
     private string $dateCreation;
     private string $dateModification;
     private int $listeId;
+    private bool $done;
     
 
-    public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification, int $listeId)
+    public function __construct(int $id, string $nom, string $descriptionTache, int $importance, string $dateCreation, string $dateModification, int $listeId, bool $done)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -20,6 +21,7 @@ class Task
         $this->dateCreation = $dateCreation;
         $this->dateModification = $dateModification;
         $this->listeId = $listeId;
+        $this->done = $done;
     }
 
     public function getId() : int
@@ -82,4 +84,13 @@ class Task
         return $this->listeId;
     }
 
+    public function setDone (bool $done)
+    {
+        $this->done = $done;
+    }
+
+    public function getDone () : bool
+    {
+        return $this->done;
+    }
 }

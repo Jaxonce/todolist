@@ -38,6 +38,9 @@ class UserControl
                 case 'supprimerTachePrive':
                     $this->deletePrivateTask();
                     break;
+                case 'changeDonePrive':
+                    $this->changeDonePrivateTask();
+                    break;
                 default:
                     $dVueErreur[] = "Erreur d'appel php";
                     require($rep . $vues['erreur']);
@@ -115,7 +118,13 @@ class UserControl
         header('Location: index.php?action=afficherListePrive');
     }
 
-
+    public function changeDonePrivateTask() : void
+    {
+        global $vues;
+        $idTache = Clean::cleanInt($_REQUEST['idTask']);
+        $this->mdlUser->changeDonePrive( $idTache);
+        header('Location: index.php?action=afficherListePrive');
+    }
 
 
     

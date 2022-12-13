@@ -26,6 +26,7 @@ CREATE TABLE Task (
    dateCreation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    dateModification timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
    listeId bigint(20) UNSIGNED NOT NULL,
+   fait boolean NOT NULL DEFAULT FALSE,
    PRIMARY KEY (id),
    FOREIGN KEY (listeId) REFERENCES Liste(id) ON DELETE CASCADE
 );

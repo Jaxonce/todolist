@@ -62,7 +62,7 @@ class ModelUser
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
             $tasks = array();
             foreach ($tasksTmp as $task) {
-                $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId']);
+                $tasks[] = new Task($task['id'], $task['nom'],$task["descriptionTache"] ?? "",$task["importance"], $task['dateCreation'], $task['dateModification'], $task['listeId'], $task['fait']);
             }
             $tab[] = new Liste($tabList['id'], $tabList['nom'], $tabList['dateModification']?? 0,$tabList['possesseur']??0, $tasks);
         }
@@ -83,7 +83,7 @@ class ModelUser
         $g = new TaskGateway(new Connection($dsn, $login, $mdp));
         $nom = Clean::cleanString($nom);
         if ($nom != "") {
-            $g->insert(new Task(0, $nom, "", 1, 0, 0, $listeId));
+            $g->insert(new Task(0, $nom, "", 1, 0, 0, $listeId,False));
         }
     }
 
@@ -109,6 +109,13 @@ class ModelUser
         global $dsn, $login, $mdp;
         $g = new TaskGateway(new Connection($dsn, $login, $mdp));
         $g->delete($idUser,$idTache);
+    }
+
+    public function changeDonePrive(int $idTache) : void
+    {
+        global $dsn, $login, $mdp;
+        $g = new TaskGateway(new Connection($dsn, $login, $mdp));
+        $g->changeDone($idTache);
     }
 
 }

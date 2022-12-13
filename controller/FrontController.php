@@ -9,7 +9,7 @@ class FrontController{
         global $rep,$vues;
 
         try{
-            $listeActionUser = ['deconnexion', 'afficherListePrive','ajoutTachePrive','ajoutListePrive','supprimerListePrive','supprimerTachePrive' ];
+            $listeActionUser = ['deconnexion', 'afficherListePrive','ajoutTachePrive','ajoutListePrive','supprimerListePrive','supprimerTachePrive','changeDonePrive' ];
             
             if (isset($_REQUEST['action']))
             {

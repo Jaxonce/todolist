@@ -131,8 +131,8 @@
                                                 <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
 
 
-
-                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check-input" />
+                                                
+                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check-input"  />
                                                     <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
                                                 </li>
 
