@@ -11,7 +11,7 @@ class UserGateway
 
     public function insert(string $nom, string $email, string $mot_de_passe)
     {
-        $query = 'INSERT INTO utilisateur (nom, email, password) VALUES (:nom, :email, :mot_de_passe)';
+        $query = 'INSERT INTO Utilisateur (nom, email, password) VALUES (:nom, :email, :mot_de_passe)';
         $this->con->executeQuery($query, array(
             ':nom' => array($nom, PDO::PARAM_STR),
             ':email' => array($email, PDO::PARAM_STR),
@@ -21,7 +21,7 @@ class UserGateway
 
     public function update(User $utilisateur)
     {
-        $query = 'UPDATE utilisateur SET nom=:nom, email=:email WHERE id=:id';
+        $query = 'UPDATE Utilisateur SET nom=:nom, email=:email WHERE id=:id';
         $this->con->executeQuery($query, array(
             ':id' => array($utilisateur->getId(), PDO::PARAM_INT),
             ':nom' => array($utilisateur->getNom(), PDO::PARAM_STR),
@@ -31,7 +31,7 @@ class UserGateway
 
     public function getCredentials(string $nom)
     {
-        $query = 'SELECT password FROM utilisateur WHERE nom=:nom';
+        $query = 'SELECT password FROM Utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
             ':nom' => array($nom, PDO::PARAM_STR)
         ));
@@ -41,7 +41,7 @@ class UserGateway
 
     public function getInfo(string $nom)
     {
-        $query = 'SELECT id, email FROM utilisateur WHERE nom=:nom';
+        $query = 'SELECT id, email FROM Utilisateur WHERE nom=:nom';
         $this->con->executeQuery($query, array(
             ':nom' => array($nom, PDO::PARAM_STR)
         ));

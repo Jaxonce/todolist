@@ -50,7 +50,7 @@
 
                                     <div class="form-outline mb-4">
                                         <input id="email" class="form-control" name="email" type="email" required style="background-color: #ececec!important; border-color:#2f435e"/>
-                                        <label class="form-label" for="email">Addresse mail</label>
+                                        <label class="form-label" for="email">Adresse mail</label>
                                     </div>
 
                                     <div class="form-outline mb-4">

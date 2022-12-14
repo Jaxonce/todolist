@@ -113,7 +113,7 @@ class VisitorControl{
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
         $this->mdl->addPublicTask($idList,$name);
-        header('Location: index.php');
+        header('Location: index.php?');
     }
 
         public function deletePublicTask(){

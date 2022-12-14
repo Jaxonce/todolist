@@ -134,8 +134,8 @@
                                         <?php
                                         foreach ($uneliste->getTaches() as $uneTache) {
                                         ?>
-                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width:-webkit-fill-available; flex-direction:row; margin-top:20px">
-                                                <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
+                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width: -moz-available; flex-direction:row; margin-top:20px">
+                                                <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item tache">
 
 
                                                     <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)"/>
