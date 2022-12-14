@@ -50,7 +50,7 @@ class UserControl
         }
     }
 
-    public function displayPrivateList() : void
+    private function displayPrivateList() : void
     {
         global $vues;
         $user = ModelUser::isUser();
@@ -69,7 +69,7 @@ class UserControl
         require($vues['vueListe']);
     }
 
-    public function deconnexion() : void
+    private function deconnexion() : void
     {
         global $vues;
         session_destroy();
@@ -77,17 +77,17 @@ class UserControl
         header('Location: index.php');
     }
 
-    public function addPrivateTask() : void
+    private function addPrivateTask() : void
     {
         global $vues;
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
         $nomTache = Clean::cleanString($_REQUEST['nameTask']);
         $this->mdlUser->addTachePrive($idListe, $nomTache);
-        header('Location: index.php?action=afficherListePrive');
+        header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
-    public function addPrivateList() : void
+    private function addPrivateList() : void
     {
         global $vues;
         $user = ModelUser::isUser();
@@ -96,7 +96,7 @@ class UserControl
         header('Location: index.php?action=afficherListePrive');
     }
 
-    public function deletePrivateList() : void
+    private function deletePrivateList() : void
     {
         global $vues;
         $user = ModelUser::isUser();
@@ -107,7 +107,7 @@ class UserControl
         header('Location: index.php?action=afficherListePrive');
     }
 
-    public function deletePrivateTask() : void
+    private function deletePrivateTask() : void
     {
         global $vues;
         $user = ModelUser::isUser();
@@ -118,7 +118,7 @@ class UserControl
         header('Location: index.php?action=afficherListePrive');
     }
 
-    public function changeDonePrivateTask() : void
+    private function changeDonePrivateTask() : void
     {
         global $vues;
         $idTache = Clean::cleanInt($_REQUEST['idTask']);

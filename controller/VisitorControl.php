@@ -59,20 +59,20 @@ class VisitorControl{
     }
     
 
-    function inscriptionPage() : void
+    private function inscriptionPage() : void
     {
         global $vues;
 
         require($vues['inscription']);
     }
 
-    function connexionPage() : void
+    private function connexionPage() : void
     {
         global $vues;
         require($vues['connexion']);
     }
     
-    public function displayPublicList(){
+    private function displayPublicList(){
         global $vues;
         $nbListeTotal=$this->mdl->getNbListPublic();
         $nbListeParPage=2;
@@ -97,29 +97,33 @@ class VisitorControl{
     // postconditions : aucun
     // remarques : aucun
 
-    public function deletePublicList(){
+    private function deletePublicList(){
         $id=$_REQUEST['idList'];
+        $pageActuelle=$_REQUEST['pageActuelle'];
         $this->mdl->deletePublicList($id);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }          
 
     public function addPublicList(){
         $name=$_REQUEST['nomListe'];
+        $pageActuelle=$_REQUEST['pageActuelle'];
         $this->mdl->addPublicList($name);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
     public function addPublicTask(){
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
+        $pageActuelle=$_REQUEST['pageActuelle'];
         $this->mdl->addPublicTask($idList,$name);
-        header('Location: index.php?');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
-        public function deletePublicTask(){
+    public function deletePublicTask(){
         $idTask=$_REQUEST['idTask'];
+        $pageActuelle=$_REQUEST['pageActuelle'];
         $this->mdl->deletePublicTask($idTask);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
     public function connexionUser(){
@@ -155,7 +159,8 @@ class VisitorControl{
 
     public function changeDonePublicTask(){
         $idTask=$_REQUEST['idTask'];
+        $pageActuelle=$_REQUEST['pageActuelle'];
         $this->mdl->changeDonePublicTask($idTask);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 }

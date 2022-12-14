@@ -14,6 +14,7 @@ $rep=__DIR__.'/../';
 $dsn="mysql:host=localhost;dbname=TO_DO_LIST";
 $login="malanone";
 $mdp="azertyuiop";
+$conBd = new Connection($dsn, $login, $mdp);
 
 //Vues
 

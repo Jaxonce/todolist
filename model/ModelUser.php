@@ -4,8 +4,8 @@ class ModelUser
 {
     public function connexion($username, $password) :?User
     {
-        global $dsn, $login, $mdp;
-        $g = new UserGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new UserGateway($conBd);
         $username = Clean::cleanString($username);
         $password = Clean::cleanString($password);
         $passwordInDb = $g->getCredentials($username);
@@ -24,8 +24,8 @@ class ModelUser
 
     public function inscription($username, $email, $password) :?User
     {
-        global $dsn, $login, $mdp;
-        $g = new UserGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new UserGateway($conBd);
         $username = Clean::cleanString($username);
         $email = Clean::cleanMail($email);
         $password = Clean::cleanString($password);
@@ -56,10 +56,10 @@ class ModelUser
 
     public function getListePrive(int $id,int $pageActuelle, int $nbListeParPage) : array
     {
-        global $dsn, $login, $mdp;
+        global $conBd;
         $tab = array();
         
-        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        $g = new ListeGateway($conBd);
         $listFromDB = $g->getPrivateList($id,$pageActuelle,$nbListeParPage);
         $g = new TaskGateway(new Connection($dsn,$login,$mdp));
         foreach ($listFromDB as $tabList) {
@@ -75,16 +75,16 @@ class ModelUser
 
     public function getNbListePrive(int $id) : int
     {
-        global $dsn, $login, $mdp;
-        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new ListeGateway($conBd);
         $nbListe = $g->getNbPrivateList($id);
         return $nbListe;
     }
 
     public function addTachePrive(int $listeId,String $nom) : void
     {
-        global $dsn, $login, $mdp;
-        $g = new TaskGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new TaskGateway($conBd);
         $nom = Clean::cleanString($nom);
         if ($nom != "") {
             $g->insert(new Task(0, $nom, "", 1, 0, 0, $listeId,False));
@@ -93,8 +93,8 @@ class ModelUser
 
     public function addListePrive(int $id, String $nom) : void
     {
-        global $dsn, $login, $mdp;
-        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new ListeGateway($conBd);
         $nom = Clean::cleanString($nom);
         if ($nom != "") {
             $g->insert($nom,$id);
@@ -103,22 +103,22 @@ class ModelUser
 
     public function deleteListePrive(int $idUser, int $idListe) : void
     {
-        global $dsn, $login, $mdp;
-        $g = new ListeGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new ListeGateway($conBd);
         $g->delete($idUser,$idListe);
     }
 
     public function deleteTachePrive(int $idUser, int $idTache) : void
     {
-        global $dsn, $login, $mdp;
-        $g = new TaskGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new TaskGateway($conBd);
         $g->delete($idUser,$idTache);
     }
 
     public function changeDonePrive(int $idTache) : void
     {
-        global $dsn, $login, $mdp;
-        $g = new TaskGateway(new Connection($dsn, $login, $mdp));
+        global $conBd;
+        $g = new TaskGateway($conBd);
         $g->changeDone($idTache);
     }
 
