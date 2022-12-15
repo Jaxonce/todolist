@@ -61,7 +61,7 @@ class ModelUser
         
         $g = new ListeGateway($conBd);
         $listFromDB = $g->getPrivateList($id,$pageActuelle,$nbListeParPage);
-        $g = new TaskGateway(new Connection($dsn,$login,$mdp));
+        $g = new TaskGateway($conBd);
         foreach ($listFromDB as $tabList) {
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
             $tasks = array();
