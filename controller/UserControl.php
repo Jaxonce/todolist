@@ -83,6 +83,7 @@ class UserControl
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
         $nomTache = Clean::cleanString($_REQUEST['nameTask']);
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdlUser->addTachePrive($idListe, $nomTache);
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
@@ -92,8 +93,9 @@ class UserControl
         global $vues;
         $user = ModelUser::isUser();
         $nomListe = Clean::cleanString($_REQUEST['nomListe']);
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdlUser->addListePrive($user->getId(), $nomListe);
-        header('Location: index.php?action=afficherListePrive');
+        header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
     private function deletePrivateList() : void
@@ -101,10 +103,11 @@ class UserControl
         global $vues;
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         var_dump($user->getId());
         var_dump($idListe);
         $this->mdlUser->deleteListePrive($user->getId(), $idListe);
-        header('Location: index.php?action=afficherListePrive');
+        header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
     private function deletePrivateTask() : void
@@ -112,18 +115,20 @@ class UserControl
         global $vues;
         $user = ModelUser::isUser();
         $idTache = Clean::cleanInt($_REQUEST['idTask']);
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
 
         
         $this->mdlUser->deleteTachePrive($user->getId(), $idTache);
-        header('Location: index.php?action=afficherListePrive');
+        header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
     private function changeDonePrivateTask() : void
     {
         global $vues;
         $idTache = Clean::cleanInt($_REQUEST['idTask']);
-        $this->mdlUser->changeDonePrive( $idTache);
-        header('Location: index.php?action=afficherListePrive');
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
+        $this->mdlUser->changeDonePrive($idTache);
+        header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
 

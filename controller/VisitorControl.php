@@ -99,14 +99,14 @@ class VisitorControl{
 
     private function deletePublicList(){
         $id=$_REQUEST['idList'];
-        $pageActuelle=$_REQUEST['pageActuelle'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicList($id);
         header('Location: index.php?page='.$pageActuelle);
     }          
 
     public function addPublicList(){
         $name=$_REQUEST['nomListe'];
-        $pageActuelle=$_REQUEST['pageActuelle'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicList($name);
         header('Location: index.php?page='.$pageActuelle);
     }
@@ -114,14 +114,14 @@ class VisitorControl{
     public function addPublicTask(){
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
-        $pageActuelle=$_REQUEST['pageActuelle'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicTask($idList,$name);
         header('Location: index.php?page='.$pageActuelle);
     }
 
     public function deletePublicTask(){
         $idTask=$_REQUEST['idTask'];
-        $pageActuelle=$_REQUEST['pageActuelle'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicTask($idTask);
         header('Location: index.php?page='.$pageActuelle);
     }
@@ -159,7 +159,7 @@ class VisitorControl{
 
     public function changeDonePublicTask(){
         $idTask=$_REQUEST['idTask'];
-        $pageActuelle=$_REQUEST['pageActuelle'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->changeDonePublicTask($idTask);
         header('Location: index.php?page='.$pageActuelle);
     }

@@ -140,15 +140,20 @@
                                         ?>
                                             <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width: -moz-available; width: -webkit-fill-available; flex-direction:row; margin-top:20px">
                                                 <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item tache">
-
-
-                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)"/>
-                                                    <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
+                                                    <style>
+                                                    del:not(:disabled) {
+                                                        text-decoration: none;
+                                                    }
+                                                    input:checked + span del {
+                                                        text-decoration: line-through;
+                                                    }
+                                                    </style>
+                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)">
+                                                    <span class="strikethrough-text lead fw-normal mb-0 d-flex"><del><?php echo $uneTache->getNom(); ?></del></span></input>
                                                 </li>
 
                                                 <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                                     <div class="d-flex flex-row justify-content-end mb-1">
-                                                        <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
                                                         <form method="post" action="?action=supprimerTache<?php echo $type; ?>" class="boutonSupp" style="background: transparent;">
                                                             <input type="hidden" name="idTask" value="<?php echo $uneTache->getId() ?>" />
                                                             
