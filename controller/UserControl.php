@@ -71,7 +71,6 @@ class UserControl
 
     private function deconnexion() : void
     {
-        global $vues;
         session_destroy();
         session_unset();
         header('Location: index.php');
@@ -79,7 +78,6 @@ class UserControl
 
     private function addPrivateTask() : void
     {
-        global $vues;
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
         $nomTache = Clean::cleanString($_REQUEST['nameTask']);
@@ -90,7 +88,6 @@ class UserControl
 
     private function addPrivateList() : void
     {
-        global $vues;
         $user = ModelUser::isUser();
         $nomListe = Clean::cleanString($_REQUEST['nomListe']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
@@ -100,7 +97,6 @@ class UserControl
 
     private function deletePrivateList() : void
     {
-        global $vues;
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
@@ -112,7 +108,6 @@ class UserControl
 
     private function deletePrivateTask() : void
     {
-        global $vues;
         $user = ModelUser::isUser();
         $idTache = Clean::cleanInt($_REQUEST['idTask']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
@@ -124,7 +119,6 @@ class UserControl
 
     private function changeDonePrivateTask() : void
     {
-        global $vues;
         $idTache = Clean::cleanInt($_REQUEST['idTask']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdlUser->changeDonePrive($idTache);

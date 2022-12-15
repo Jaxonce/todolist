@@ -26,9 +26,6 @@ class ModelUser
     {
         global $conBd;
         $g = new UserGateway($conBd);
-        $username = Clean::cleanString($username);
-        $email = Clean::cleanMail($email);
-        $password = Clean::cleanString($password);
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         try{
             $g->insert($username, $email, $passwordHash);

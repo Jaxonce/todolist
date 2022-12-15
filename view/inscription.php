@@ -69,7 +69,9 @@
                                 </form>
                                 <?php
                                 if (isset($erreurConnexion)) {
-                                    echo '<div class="alert alert-danger" role="alert">' . $erreurConnexion . '</div>';
+                                    foreach ($erreurConnexion as $erreur) {
+                                        echo '<div class="alert alert-danger" role="alert">' . $erreur . '</div>';
+                                    }
                                 }
                                 ?>
                             </div>
