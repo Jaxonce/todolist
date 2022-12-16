@@ -45,8 +45,13 @@ class UserControl
                     $dVueErreur[] = "Erreur d'appel php";
                     require($rep . $vues['erreur']);
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (PDOException $e) {
+            $message = "500 : Erreur serveur PDO";
+            require($rep . $vues['erreur']);
+        }
+        catch (Exception $e) {
+            $message = $e->getMessage();
+            require($rep . $vues['erreur']);
         }
     }
 

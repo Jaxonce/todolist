@@ -53,8 +53,13 @@ class VisitorControl{
                 default:
                     throw new Exception("Action non valide");
             }
-        }catch(Exception $e){
-            echo $e->getMessage();
+        }catch (PDOException $e){
+            $message="500 : Erreur serveur PDO";
+            require($rep.$vues['erreur']);
+        }
+        catch(Exception $e){
+            $message=$e->getMessage();
+            require($rep.$vues['erreur']);
         }
     }
     

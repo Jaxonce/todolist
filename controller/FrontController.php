@@ -25,8 +25,13 @@ class FrontController{
             }
             
             else new VisitorControl();
+            
 
+        }catch (PDOException $e){
+            $message="500 : Erreur serveur PDO";
+            require ($rep.$vues['erreur']);
         }catch (Exception $e){
+            $message=$e->getMessage();
             require ($rep.$vues['erreur']);
         }
     }
