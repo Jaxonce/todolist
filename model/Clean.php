@@ -19,12 +19,11 @@ class Clean
 
         return $string;
     }
-
     /**
      * @param int $int
      * @return int
      */
-    public static function cleanInt(int $int) : int
+    public static function cleanInt(string $int) : int
     {
         // Nettoyage de l'input
         $int = filter_var($int, FILTER_SANITIZE_NUMBER_INT);

@@ -19,7 +19,7 @@ class VisitorControl{
 
         try {
             if (isset($_REQUEST['action'])){
-                $action = $_REQUEST['action'];
+                $action = Clean::cleanString($_REQUEST['action']);
             }
             else $action = NULL;
 
@@ -122,7 +122,7 @@ class VisitorControl{
      * @return void
      */
     private function deletePublicList(){
-        $id=$_REQUEST['idList'];
+        $id=Clean::cleanInt($_REQUEST['idList']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicList($id);
         header('Location: index.php?page='.$pageActuelle);
@@ -132,7 +132,7 @@ class VisitorControl{
      * @return void
      */
     private function addPublicList(){
-        $name=$_REQUEST['nomListe'];
+        $name=Clean::cleanString($_REQUEST['nomListe']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicList($name);
         header('Location: index.php?page='.$pageActuelle);
@@ -142,8 +142,8 @@ class VisitorControl{
      * @return void
      */
     private function addPublicTask(){
-        $idList=$_REQUEST['idList'];
-        $name=$_REQUEST['nameTask'];
+        $idList=Clean::cleanInt($_REQUEST['idList']);
+        $name=Clean::cleanString($_REQUEST['nameTask']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicTask($idList,$name);
         header('Location: index.php?page='.$pageActuelle);
@@ -153,7 +153,7 @@ class VisitorControl{
      * @return void
      */
     private function deletePublicTask(){
-        $idTask=$_REQUEST['idTask'];
+        $idTask=Clean::cleanInt($_REQUEST['idTask']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicTask($idTask);
         header('Location: index.php?page='.$pageActuelle);
@@ -165,7 +165,7 @@ class VisitorControl{
     private function connexionUser(){
         global $vues;
         $mdlUser=new ModelUser();
-        $username = $_REQUEST['username'];
+        $username = Clean::cleanString($_REQUEST['username']);
         $user = $mdlUser->connexion($username, $_REQUEST['password']);
         if($user == null){
             $erreurConnexion = "Erreur de connexion";
@@ -217,7 +217,7 @@ class VisitorControl{
      * @return void
      */
     private function changeDonePublicTask(){
-        $idTask=$_REQUEST['idTask'];
+        $idTask=Clean::cleanInt($_REQUEST['idTask']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->changeDonePublicTask($idTask);
         header('Location: index.php?page='.$pageActuelle);

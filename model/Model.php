@@ -78,9 +78,7 @@ class Model
     public function addPublicTask (int $listeId, String $nom) : void
     {
         global $conBd;
-        $g=new TaskGateway($conBd);
-        $nom = Clean::cleanString($nom);
-
+        $g=new TaskGateway($conBd);      
         if (strlen($nom) > 0) {
             $task = new Task(0, $nom, "description", 0, 0, 0, $listeId, False);
             $g->insertPublic($task);

@@ -23,7 +23,7 @@ class UserControl
         try {
             
             if (isset($_REQUEST['action'])) {
-                $action = $_REQUEST['action'];
+                $action = Clean::cleanString($_REQUEST['action']);
             } else $action = NULL;
 
             switch ($action) {
