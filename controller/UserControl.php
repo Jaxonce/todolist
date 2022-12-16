@@ -130,8 +130,6 @@ class UserControl
         $user = ModelUser::isUser();
         $idListe = Clean::cleanInt($_REQUEST['idList']);
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
-        var_dump($user->getId());
-        var_dump($idListe);
         $this->mdlUser->deleteListePrive($user->getId(), $idListe);
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
