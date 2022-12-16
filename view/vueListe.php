@@ -43,6 +43,7 @@
         </div>
     </header>
     <form method="post" action="?action=ajoutListe<?php echo $type; ?>" style="display:flex!important;align-items:center; justify-content: center;">
+        <input type="hidden" name="pageActuelle" value="<?php echo $pageActuelle ?>" />
         <input required placeholder="Ajouter une nouvelle liste..." type="text" id="form3" name="nomListe" class="form-control form-control-lg" style="margin: 10px 10px 10px 10px;" />
         <button class="btn btn-primary" style="margin-right:10px; background-color: #2f435e; border-color:#2f435e" type="submit">Ajouter</button>
     </form>
@@ -92,6 +93,8 @@
                                                                     echo $uneliste->getNom();
                                                                     ?></u>
                                     <form method="post" action="?action=supprimerListe<?php echo $type; ?> " class="boutonSupp" style="background: transparent;">
+                                        
+                                        <input type="hidden" name="pageActuelle" value="<?php echo $pageActuelle ?>" />
                                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
                                         <button type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette liste ? Les taches associées seront également supprimées.');" style="background : transparent; border : none">
                                             <img onmouseover="onImageDelete.call(this)" onmouseout="outImageDelete.call(this)" src="./view/assets/bin_empty.svg" />
@@ -106,6 +109,7 @@
                                                     <form method="post" action="?action=ajoutTache<?php echo $type; ?>" class="d-flex flex-row align-items-center">
                                                         <input required name="nameTask" type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Ex: faire la vaisselle" style="margin-right:10px ">
                                                         <input type="hidden" name="idList" value="<?php echo $uneliste->getId() ?>" />
+                                                        <input type="hidden" name="pageActuelle" value="<?php echo $pageActuelle ?>" />
                                                         <div>
                                                             <button type="submit" class="btn btn-primary" style="background-color: #2f435e; border-color:#2f435e">Ajouter</button>
                                                         </div>
@@ -134,19 +138,26 @@
                                         <?php
                                         foreach ($uneliste->getTaches() as $uneTache) {
                                         ?>
-                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width:-webkit-fill-available; flex-direction:row; margin-top:20px">
-                                                <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item merde">
-
-
-                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)"/>
-                                                    <span class="strikethrough-text lead fw-normal mb-0 d-flex"><?php echo $uneTache->getNom(); ?></span>
+                                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" style="display: flex; justify-content:space-between; width: -moz-available; width: -webkit-fill-available; flex-direction:row; margin-top:20px">
+                                                <li class="bg-transparent border-0 py-1 ps-0 pe-3 align-items-center d-flex list-group-item tache">
+                                                    <style>
+                                                    del:not(:disabled) {
+                                                        text-decoration: none;
+                                                    }
+                                                    input:checked + span del {
+                                                        text-decoration: line-through;
+                                                    }
+                                                    </style>
+                                                    <input type="checkbox" value="" aria-label="..." class="strikethrough form-check" style="margin-right: 10px" <?php if($uneTache->getDone()) { echo 'checked'; } ?> onchange="updateBaseCheck(<?php echo $uneTache->getId();?>)">
+                                                    <span class="strikethrough-text lead fw-normal mb-0 d-flex"><del><?php echo $uneTache->getNom(); ?></del></span></input>
                                                 </li>
 
                                                 <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                                     <div class="d-flex flex-row justify-content-end mb-1">
-                                                        <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
                                                         <form method="post" action="?action=supprimerTache<?php echo $type; ?>" class="boutonSupp" style="background: transparent;">
                                                             <input type="hidden" name="idTask" value="<?php echo $uneTache->getId() ?>" />
+                                                            
+                                                            <input type="hidden" name="pageActuelle" value="<?php echo $pageActuelle ?>" />
                                                             <button style="background: transparent ; border: none" type="submit" onclick="return confirm('Cette action est irréversible. Voulez-vous vraiment supprimer cette tache ?');" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></button>
                                                         </form>
                                                     </div>
@@ -188,7 +199,7 @@
         }
 
         function updateBaseCheck(id) {
-            location.replace("?action=changeDone<?php echo $type?>&idTask=" + id);
+            location.replace("?action=changeDone<?php echo $type?>&idTask=" + id + "&pageActuelle=<?php echo $pageActuelle?>");
 
         }
     </script>

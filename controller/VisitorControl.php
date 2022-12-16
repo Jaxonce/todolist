@@ -23,14 +23,12 @@ class VisitorControl{
                     break;
                 case 'ajoutListePublic':
                     $this->addPublicList();
-                    $action = NULL;
                     break;
                 case 'ajoutTachePublic':
                     $this->addPublicTask();
                     break;
                 case 'supprimerListePublic':
                     $this->deletePublicList();
-                    $action = NULL;
                     break;
                 case 'supprimerTachePublic':
                     $this->deletePublicTask();
@@ -64,20 +62,20 @@ class VisitorControl{
     }
     
 
-    function inscriptionPage() : void
+    private function inscriptionPage() : void
     {
         global $vues;
 
         require($vues['inscription']);
     }
 
-    function connexionPage() : void
+    private function connexionPage() : void
     {
         global $vues;
         require($vues['connexion']);
     }
     
-    public function displayPublicList(){
+    private function displayPublicList(){
         global $vues;
         $nbListeTotal=$this->mdl->getNbListPublic();
         $nbListeParPage=2;
@@ -102,32 +100,36 @@ class VisitorControl{
     // postconditions : aucun
     // remarques : aucun
 
-    public function deletePublicList(){
+    private function deletePublicList(){
         $id=$_REQUEST['idList'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicList($id);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }          
 
-    public function addPublicList(){
+    private function addPublicList(){
         $name=$_REQUEST['nomListe'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicList($name);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
-    public function addPublicTask(){
+    private function addPublicTask(){
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->addPublicTask($idList,$name);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
-        public function deletePublicTask(){
+    private function deletePublicTask(){
         $idTask=$_REQUEST['idTask'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicTask($idTask);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 
-    public function connexionUser(){
+    private function connexionUser(){
         global $vues;
         $mdlUser=new ModelUser();
         $username = $_REQUEST['username'];
@@ -142,15 +144,32 @@ class VisitorControl{
         }
     }
 
-    public function inscriptionUser(){
+    private function inscriptionUser(){
         global $vues;
         $mdlUser=new ModelUser();
-        $username = $_REQUEST['username'];
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
+        $erreurConnexion = array();
+        $username = Clean::cleanString($_REQUEST['username']);
+        $email = Clean::cleanMail($_REQUEST['email']);
+        $password = Clean::cleanString($_REQUEST['password']);
+        if (empty($username)) {
+            $erreurConnexion[] = "Le nom d'utilisateur est vide";
+        }
+        if (empty($email)) {
+            $erreurConnexion[] = "L'email est vide";
+        }
+        if (empty($password)) {
+            $erreurConnexion[] = "Le mot de passe est vide";
+        }
+        if (! Verif::verifMail($email) && !empty($email)) {
+            $erreurConnexion[] = "L'email n'est pas valide";
+        }
+        if (count($erreurConnexion) > 0){
+            require($vues['inscription']);
+            return;
+        }
         $user = $mdlUser->inscription($username, $email, $password);
         if($user == null){
-            $erreurConnexion = "Cet utilisateur existe deja";
+            $erreurConnexion[] = "Cet utilisateur existe deja";
             require($vues['inscription']);
         }
         else{
@@ -158,9 +177,10 @@ class VisitorControl{
         }
     }
 
-    public function changeDonePublicTask(){
+    private function changeDonePublicTask(){
         $idTask=$_REQUEST['idTask'];
+        $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->changeDonePublicTask($idTask);
-        header('Location: index.php');
+        header('Location: index.php?page='.$pageActuelle);
     }
 }

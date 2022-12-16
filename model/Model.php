@@ -7,12 +7,12 @@ class Model
 {
     public function getListPublic($currentPage, $nbListeParPage) : iterable // $page ?
     {
-        global $dsn, $login, $mdp;
+        global $conBd;
         $tab = array();
 
-        $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+        $g=new ListeGateway($conBd);
         $publicListFromDB=$g->getListPublic($currentPage, $nbListeParPage);
-        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        $g=new TaskGateway($conBd);
         foreach ($publicListFromDB as $tabList) {
             $tasksTmp = $g->getTachesByListeId($tabList['id']);
             $tasks = array();
@@ -26,17 +26,17 @@ class Model
 
     public function getNbListPublic() : int
     {
-        global $dsn, $login, $mdp;
-        $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+        global $conBd;
+        $g=new ListeGateway($conBd);
         $nbListeTotal=$g->getNbListPublic();
         return $nbListeTotal;
     }
     
     public function addPublicList(string $nom) : void
     {
-        global $dsn, $login, $mdp;
+        global $conBd;
         try{
-            $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+            $g=new ListeGateway($conBd);
             $liste = new Liste(0, $nom, 0,0);
             $g->insertPublic($liste);
         }catch (Exception $e){
@@ -46,15 +46,15 @@ class Model
 
     public function deletePublicList(int $id) : void
     {
-        global $dsn, $login, $mdp;
-        $g=new ListeGateway(new Connection($dsn,$login,$mdp));
+        global $conBd;
+        $g=new ListeGateway($conBd);
         $g->deletePublicList($id);
     }
 
     public function addPublicTask (int $listeId,String $nom) : void
     {
-        global $dsn, $login, $mdp;
-        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        global $conBd;
+        $g=new TaskGateway($conBd);
         $nom = Clean::cleanString($nom);
 
         if (strlen($nom) > 0) {
@@ -65,15 +65,15 @@ class Model
 
     public function deletePublicTask(int $id) : void
     {
-        global $dsn, $login, $mdp;
-        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        global $conBd;
+        $g=new TaskGateway($conBd);
         $g->deletePublicTask($id);
     }
 
     public function changeDonePublicTask(int $id) : void
     {
-        global $dsn, $login, $mdp;
-        $g=new TaskGateway(new Connection($dsn,$login,$mdp));
+        global $conBd;
+        $g=new TaskGateway($conBd);
         $g->changeDone($id);
     }
 }
