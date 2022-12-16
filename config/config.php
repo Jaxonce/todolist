@@ -3,12 +3,6 @@
 //gen
 $rep=__DIR__.'/../';
 
-// liste des modules à inclure
-
-//$dConfig['includes']= array('controleur/Validation.php');
-
-
-
 //BD
 
 $dsn="mysql:host=localhost;dbname=TO_DO_LIST";

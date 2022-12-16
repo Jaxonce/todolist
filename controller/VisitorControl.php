@@ -109,15 +109,6 @@ class VisitorControl{
         require($vues['vueListe']);
     }
 
-    // documentation de la fonction displayPublicList
-    // affiche la liste des listes publiques
-    // paramètres : aucun
-    // résultat : aucun
-    // effets de bord : aucun
-    // préconditions : aucun
-    // postconditions : aucun
-    // remarques : aucun
-
     /**
      * @return void
      */
