@@ -1,9 +1,18 @@
 <?php
 require_once('config/config.php');
 
+/**
+ *
+ */
 class VisitorControl{
+    /**
+     * @var Model
+     */
     private Model $mdl;
 
+    /**
+     *
+     */
     public function __construct(){
         global $vues,$rep;
         $this->mdl = new Model();
@@ -60,8 +69,11 @@ class VisitorControl{
             require($rep.$vues['erreur']);
         }
     }
-    
 
+
+    /**
+     * @return void
+     */
     private function inscriptionPage() : void
     {
         global $vues;
@@ -69,12 +81,18 @@ class VisitorControl{
         require($vues['inscription']);
     }
 
+    /**
+     * @return void
+     */
     private function connexionPage() : void
     {
         global $vues;
         require($vues['connexion']);
     }
-    
+
+    /**
+     * @return void
+     */
     private function displayPublicList(){
         global $vues;
         $nbListeTotal=$this->mdl->getNbListPublic();
@@ -100,13 +118,19 @@ class VisitorControl{
     // postconditions : aucun
     // remarques : aucun
 
+    /**
+     * @return void
+     */
     private function deletePublicList(){
         $id=$_REQUEST['idList'];
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
         $this->mdl->deletePublicList($id);
         header('Location: index.php?page='.$pageActuelle);
-    }          
+    }
 
+    /**
+     * @return void
+     */
     private function addPublicList(){
         $name=$_REQUEST['nomListe'];
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
@@ -114,6 +138,9 @@ class VisitorControl{
         header('Location: index.php?page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function addPublicTask(){
         $idList=$_REQUEST['idList'];
         $name=$_REQUEST['nameTask'];
@@ -122,6 +149,9 @@ class VisitorControl{
         header('Location: index.php?page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function deletePublicTask(){
         $idTask=$_REQUEST['idTask'];
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);
@@ -129,6 +159,9 @@ class VisitorControl{
         header('Location: index.php?page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function connexionUser(){
         global $vues;
         $mdlUser=new ModelUser();
@@ -144,6 +177,9 @@ class VisitorControl{
         }
     }
 
+    /**
+     * @return void
+     */
     private function inscriptionUser(){
         global $vues;
         $mdlUser=new ModelUser();
@@ -177,6 +213,9 @@ class VisitorControl{
         }
     }
 
+    /**
+     * @return void
+     */
     private function changeDonePublicTask(){
         $idTask=$_REQUEST['idTask'];
         $pageActuelle=Clean::cleanInt($_REQUEST['pageActuelle']);

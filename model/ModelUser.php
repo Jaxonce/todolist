@@ -1,7 +1,15 @@
 <?php
 
+/**
+ *
+ */
 class ModelUser
 {
+    /**
+     * @param $username
+     * @param $password
+     * @return User|null
+     */
     public function connexion($username, $password) :?User
     {
         global $conBd;
@@ -22,6 +30,12 @@ class ModelUser
 
     }
 
+    /**
+     * @param $username
+     * @param $email
+     * @param $password
+     * @return User|null
+     */
     public function inscription($username, $email, $password) :?User
     {
         global $conBd;
@@ -35,6 +49,9 @@ class ModelUser
         return $this->connexion($username, $password);
     }
 
+    /**
+     * @return User|null
+     */
     public static function isUser(): ?User
     {
         if (isset($_SESSION['username']) && isset($_SESSION['role']) && isset($_SESSION['email']) && isset($_SESSION["id"])){
@@ -51,7 +68,13 @@ class ModelUser
 
     }
 
-    public function getListePrive(int $id,int $pageActuelle, int $nbListeParPage) : array
+    /**
+     * @param int $id
+     * @param int $pageActuelle
+     * @param int $nbListeParPage
+     * @return array
+     */
+    public function getListePrive(int $id, int $pageActuelle, int $nbListeParPage) : array
     {
         global $conBd;
         $tab = array();
@@ -70,6 +93,10 @@ class ModelUser
         return $tab;
     }
 
+    /**
+     * @param int $id
+     * @return int
+     */
     public function getNbListePrive(int $id) : int
     {
         global $conBd;
@@ -78,7 +105,12 @@ class ModelUser
         return $nbListe;
     }
 
-    public function addTachePrive(int $listeId,String $nom) : void
+    /**
+     * @param int $listeId
+     * @param String $nom
+     * @return void
+     */
+    public function addTachePrive(int $listeId, String $nom) : void
     {
         global $conBd;
         $g = new TaskGateway($conBd);
@@ -88,6 +120,11 @@ class ModelUser
         }
     }
 
+    /**
+     * @param int $id
+     * @param String $nom
+     * @return void
+     */
     public function addListePrive(int $id, String $nom) : void
     {
         global $conBd;
@@ -98,6 +135,11 @@ class ModelUser
         }
     }
 
+    /**
+     * @param int $idUser
+     * @param int $idListe
+     * @return void
+     */
     public function deleteListePrive(int $idUser, int $idListe) : void
     {
         global $conBd;
@@ -105,6 +147,11 @@ class ModelUser
         $g->delete($idUser,$idListe);
     }
 
+    /**
+     * @param int $idUser
+     * @param int $idTache
+     * @return void
+     */
     public function deleteTachePrive(int $idUser, int $idTache) : void
     {
         global $conBd;
@@ -112,6 +159,10 @@ class ModelUser
         $g->delete($idUser,$idTache);
     }
 
+    /**
+     * @param int $idTache
+     * @return void
+     */
     public function changeDonePrive(int $idTache) : void
     {
         global $conBd;

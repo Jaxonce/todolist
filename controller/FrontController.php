@@ -1,9 +1,18 @@
 <?php
 
+/**
+ *
+ */
 class FrontController{
+    /**
+     * @var ModelUser
+     */
     private ModelUser $mdl;
 
 
+    /**
+     *
+     */
     public function __construct()
     {
         global $rep,$vues;

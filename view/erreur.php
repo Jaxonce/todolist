@@ -36,7 +36,7 @@
                     echo $message ?? "Quelque chose s'est mal passé";
                 ?>
             </h2>
-			<a href="?action">home page</a>
+			<a href="?action">Page d'accueil</a>
 		</div>
 	</div>
 

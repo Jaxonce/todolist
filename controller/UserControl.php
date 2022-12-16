@@ -1,10 +1,20 @@
 <?php
 require_once('config/config.php');
+
+/**
+ *
+ */
 class UserControl
 {
+    /**
+     * @var ModelUser
+     */
     private ModelUser $mdlUser;
 
 
+    /**
+     *
+     */
     public function __construct()
     {
         global $vues, $rep;
@@ -55,6 +65,9 @@ class UserControl
         }
     }
 
+    /**
+     * @return void
+     */
     private function displayPrivateList() : void
     {
         global $vues;
@@ -74,6 +87,9 @@ class UserControl
         require($vues['vueListe']);
     }
 
+    /**
+     * @return void
+     */
     private function deconnexion() : void
     {
         session_destroy();
@@ -81,6 +97,9 @@ class UserControl
         header('Location: index.php');
     }
 
+    /**
+     * @return void
+     */
     private function addPrivateTask() : void
     {
         $user = ModelUser::isUser();
@@ -91,6 +110,9 @@ class UserControl
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function addPrivateList() : void
     {
         $user = ModelUser::isUser();
@@ -100,6 +122,9 @@ class UserControl
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function deletePrivateList() : void
     {
         $user = ModelUser::isUser();
@@ -111,6 +136,9 @@ class UserControl
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function deletePrivateTask() : void
     {
         $user = ModelUser::isUser();
@@ -122,6 +150,9 @@ class UserControl
         header('Location: index.php?action=afficherListePrive&page='.$pageActuelle);
     }
 
+    /**
+     * @return void
+     */
     private function changeDonePrivateTask() : void
     {
         $idTache = Clean::cleanInt($_REQUEST['idTask']);

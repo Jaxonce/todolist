@@ -1,7 +1,14 @@
 <?php
 
+/**
+ *
+ */
 class Clean
 {
+    /**
+     * @param string $string
+     * @return string
+     */
     public static function cleanString(string $string) : string
     {        
         // Nettoyage de l'input
@@ -13,6 +20,10 @@ class Clean
         return $string;
     }
 
+    /**
+     * @param int $int
+     * @return int
+     */
     public static function cleanInt(int $int) : int
     {
         // Nettoyage de l'input
@@ -21,6 +32,10 @@ class Clean
         return $int;
     }
 
+    /**
+     * @param string $mail
+     * @return string
+     */
     public static function cleanMail(string $mail) : string
     {        
         // Nettoyage de l'input

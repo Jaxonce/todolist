@@ -1,14 +1,29 @@
 <?php
 
+/**
+ *
+ */
 class UserGateway
 {
+    /**
+     * @var Connection
+     */
     private $con;
 
+    /**
+     * @param Connection $con
+     */
     public function __construct(Connection $con)
     {
         $this->con = $con;
     }
 
+    /**
+     * @param string $nom
+     * @param string $email
+     * @param string $mot_de_passe
+     * @return void
+     */
     public function insert(string $nom, string $email, string $mot_de_passe)
     {
         $query = 'INSERT INTO Utilisateur (nom, email, password) VALUES (:nom, :email, :mot_de_passe)';
@@ -19,6 +34,10 @@ class UserGateway
         ));
     }
 
+    /**
+     * @param User $utilisateur
+     * @return void
+     */
     public function update(User $utilisateur)
     {
         $query = 'UPDATE Utilisateur SET nom=:nom, email=:email WHERE id=:id';
@@ -29,6 +48,10 @@ class UserGateway
         ));
     }
 
+    /**
+     * @param string $nom
+     * @return array
+     */
     public function getCredentials(string $nom)
     {
         $query = 'SELECT password FROM Utilisateur WHERE nom=:nom';
@@ -39,6 +62,10 @@ class UserGateway
         return $result;
     }
 
+    /**
+     * @param string $nom
+     * @return array
+     */
     public function getInfo(string $nom)
     {
         $query = 'SELECT id, email FROM Utilisateur WHERE nom=:nom';

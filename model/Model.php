@@ -3,8 +3,16 @@
 
 require_once "ListeGateway.php";
 
+/**
+ *
+ */
 class Model
 {
+    /**
+     * @param $currentPage
+     * @param $nbListeParPage
+     * @return iterable
+     */
     public function getListPublic($currentPage, $nbListeParPage) : iterable // $page ?
     {
         global $conBd;
@@ -24,6 +32,9 @@ class Model
         return $tab;
     }
 
+    /**
+     * @return int
+     */
     public function getNbListPublic() : int
     {
         global $conBd;
@@ -31,7 +42,11 @@ class Model
         $nbListeTotal=$g->getNbListPublic();
         return $nbListeTotal;
     }
-    
+
+    /**
+     * @param string $nom
+     * @return void
+     */
     public function addPublicList(string $nom) : void
     {
         global $conBd;
@@ -44,6 +59,10 @@ class Model
         }
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     public function deletePublicList(int $id) : void
     {
         global $conBd;
@@ -51,7 +70,12 @@ class Model
         $g->deletePublicList($id);
     }
 
-    public function addPublicTask (int $listeId,String $nom) : void
+    /**
+     * @param int $listeId
+     * @param String $nom
+     * @return void
+     */
+    public function addPublicTask (int $listeId, String $nom) : void
     {
         global $conBd;
         $g=new TaskGateway($conBd);
@@ -63,6 +87,10 @@ class Model
         }
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     public function deletePublicTask(int $id) : void
     {
         global $conBd;
@@ -70,6 +98,10 @@ class Model
         $g->deletePublicTask($id);
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     public function changeDonePublicTask(int $id) : void
     {
         global $conBd;
